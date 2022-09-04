@@ -51,6 +51,9 @@ class HomeScreen extends StatelessWidget {
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
               style: Styles.textStyle,
             ),
+            SizedBox(
+              height: 12,
+            ),
 
             Expanded(
               child: ListView(
@@ -58,7 +61,7 @@ class HomeScreen extends StatelessWidget {
                 padding: EdgeInsets.only(top: 30, bottom: 30),
                 children: [
                   Container(
-                    height: 180,
+                    height: 240,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
                         color: Styles.primaryColor,
