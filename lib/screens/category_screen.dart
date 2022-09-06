@@ -79,28 +79,52 @@ class CategoryScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: Colors.white,
+                      image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage(
+                              "assets/images/castle-floor.jpg")),
                     ),
                   ),
                   SizedBox(
                     height: 20,
                   ),
-                  Expanded(
-                    child: GridView.count(
-                      physics: ScrollPhysics(),
+                  Stack(
+                    children: [GridView.count(
+                      physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      // Create a grid with 2 columns. If you change the scrollDirection to
-                      // horizontal, this produces 2 rows.
                       crossAxisCount: 2,
-                      // Generate 100 widgets that display their index in the List.
-                      children: List.generate(10, (index) {
-                        return Center(
-                          child: Text(
-                            'Item $index',
-                            style: Styles.textStyle,
+                      childAspectRatio: 0.75,
+                      crossAxisSpacing: 15,
+                      mainAxisSpacing: 15,
+                      children: List.generate(6, (index) {
+                        return ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: GridTile(
+                            footer: GridTileBar(
+                              backgroundColor: Styles.darkGrayColor,
+                              title: Text(
+                                "Wedding Room for Guests",
+                                textAlign: TextAlign.center,
+                                style: Styles.headlineStyle3.copyWith(fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                            child: GestureDetector(
+                              onTap: () {
+                                // Add action
+                                // Navigator.of(context).pushNamed(
+                                //     BookDetailScreen.routeName,
+                                //     arguments: product.id,
+                                // );
+                              },
+                              child: Image.asset(
+                                "assets/images/IMG_3278_grad_sneznik_porocna_dvorana_big.jpg",
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                           ),
                         );
                       }),
-                    ),
+                    ),]
                   ),
                 ]),
           )

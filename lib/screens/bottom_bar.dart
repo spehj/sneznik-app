@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sneznik_app/screens/category_screen.dart';
 import 'package:sneznik_app/screens/favorites_screen.dart';
+import 'package:sneznik_app/screens/subcategory_screen.dart';
 
 import '../utils/app_styles.dart';
 import 'home_screen.dart';
@@ -24,7 +25,7 @@ class _BottomBarState extends State<BottomBar> {
     const HomeScreen(),
     const CategoryScreen(),
     const SettingsScreen(),
-    const InfoScreen(),
+    const SubcategoryScreen(),
     // const Text("Tickets"),
     // const Text("Profile"),
 

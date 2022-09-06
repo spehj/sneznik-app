@@ -1,4 +1,11 @@
 List<Map<String, dynamic>> floorInfoList = [
+
+  {
+    "header": "Basement",
+    "description":
+    "Meet the great brown bear, explore magnificent dining hall, experience the wedding room...",
+    "image": "Medved-Sneznik-0002.jpg",
+  },
   {
     "header": "First Floor",
     "description":
@@ -8,13 +15,14 @@ List<Map<String, dynamic>> floorInfoList = [
   {
     "header": "Second Floor",
     "description":
-    "Meet the great brown bear, explore magnificent dining hall, experience the wedding room...",
+        "Meet the great brown bear, explore magnificent dining hall, experience the wedding room...",
     "image": "Medved-Sneznik-0002.jpg",
   },
   {
     "header": "Third Floor",
     "description":
-    "Meet the great brown bear, explore magnificent dining hall, experience the wedding room...",
+        "Meet the great brown bear, explore magnificent dining hall, experience the wedding room...",
     "image": "Medved-Sneznik-0002.jpg",
-  }
+  },
+
 ];
