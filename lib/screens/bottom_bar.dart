@@ -43,7 +43,7 @@ class _BottomBarState extends State<BottomBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Styles.bgColor, //Styles.bgColor
+      backgroundColor: Colors.transparent, //Styles.bgColor
       body: Center(child: _widgetOptions[_selectedIndex]),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(

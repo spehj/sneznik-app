@@ -18,4 +18,5 @@ class Styles{
   static Color whiteTextColor = const Color(0xFFFFFFFF);
   static Color greyTextColor = const Color(0xFF666666);
   static Color oceanBlueColor = const Color(0xFF5f3dc4);
+  static Color greyCardColor = const Color(0xFF525252);
 }

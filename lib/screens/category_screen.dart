@@ -54,7 +54,7 @@ class CategoryScreen extends StatelessWidget {
           // Description
 
           Padding(
-            padding: const EdgeInsets.only(left: 12),
+            padding: const EdgeInsets.only(left: 12, bottom: 12),
             // TODO: fill with data from json
             child: SizedBox(
               width: double.infinity,
@@ -81,15 +81,26 @@ class CategoryScreen extends StatelessWidget {
                       color: Colors.white,
                       image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: AssetImage(
-                              "assets/images/castle-floor.jpg")),
+                          image: AssetImage("assets/images/castle-floor.jpg")),
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
-                  Stack(
-                    children: [GridView.count(
+                  Container(
+                    height: 1,
+                    margin: EdgeInsets.symmetric(horizontal: 12),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      color: Styles.whiteIconColor,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Stack(children: [
+                    GridView.count(
+                      padding: EdgeInsets.only(top: 20),
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       crossAxisCount: 2,
@@ -98,6 +109,7 @@ class CategoryScreen extends StatelessWidget {
                       mainAxisSpacing: 15,
                       children: List.generate(6, (index) {
                         return ClipRRect(
+
                           borderRadius: BorderRadius.circular(20),
                           child: GridTile(
                             footer: GridTileBar(
@@ -105,7 +117,8 @@ class CategoryScreen extends StatelessWidget {
                               title: Text(
                                 "Wedding Room for Guests",
                                 textAlign: TextAlign.center,
-                                style: Styles.headlineStyle3.copyWith(fontWeight: FontWeight.w500),
+                                style: Styles.headlineStyle3
+                                    .copyWith(fontWeight: FontWeight.w500),
                               ),
                             ),
                             child: GestureDetector(
@@ -124,8 +137,8 @@ class CategoryScreen extends StatelessWidget {
                           ),
                         );
                       }),
-                    ),]
-                  ),
+                    ),
+                  ]),
                 ]),
           )
         ]),
