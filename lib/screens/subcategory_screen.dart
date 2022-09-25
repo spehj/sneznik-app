@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sneznik_app/widgets/artefact_widget.dart';
 
 import '../utils/app_styles.dart';
 
@@ -12,7 +13,7 @@ class SubcategoryScreen extends StatelessWidget {
       backgroundColor: Styles.bgColor,
       body: Container(
         margin: EdgeInsets.only(top: 30),
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+        padding: EdgeInsets.only(left:16, right: 16, top: 12),
         child: Column(children: [
           SizedBox(
             height: 30,
@@ -94,7 +95,7 @@ class SubcategoryScreen extends StatelessWidget {
           // Floor plan
           Expanded(
             child: ListView(
-                padding: EdgeInsets.only(top: 20, bottom: 30),
+                padding: EdgeInsets.only(top: 20, bottom: 10),
                 children: [
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
@@ -121,7 +122,7 @@ class SubcategoryScreen extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et doa aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et doa aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. \n\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                     style: Styles.textStyle,
                   ),
                   SizedBox(
@@ -132,184 +133,11 @@ class SubcategoryScreen extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: [
-                          Stack(alignment: Alignment.bottomCenter, children: [
-                            Container(
-                              height: 360,
-                              width: 260,
-                              margin: EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 10),
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 16, horizontal: 0),
-                              decoration: BoxDecoration(
-                                color: Styles.greyCardColor,
-                                borderRadius: BorderRadius.circular(25),
-                                image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: AssetImage(
-                                        "assets/images/Medved-Sneznik-0002.jpg")),
-                              ),
-                              child: Column(
-                                children: [
-                                  // Container for image
-                                ],
-                              ),
-                            ),
+                          ArtefactImage(),
+                          ArtefactImage(),
+                          ArtefactImage(),
+                          ArtefactImage(),
 
-                            // Overlay Container
-                            Container(
-                              height: 100,
-                              width: 230,
-                              margin: EdgeInsets.only(bottom: 16),
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 14, vertical: 10),
-                              decoration: BoxDecoration(
-                                  color: Color(0xFFEDEDED).withOpacity(0.85),
-                                  borderRadius: BorderRadius.circular(25)),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Sample Artifact",
-                                    style: Styles.headlineStyle3.copyWith(
-                                        color: Styles.bgColor, fontSize: 20),
-                                    textAlign: TextAlign.left,
-                                  ),
-                                  SizedBox(
-                                    height: 8,
-                                  ),
-                                  Text(
-                                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque turpis nulla, rutrum id porttitor et, porta id ante. Curabitur sollicitudin sodales sapien a tempus. Curabitur bibendum dolor at metus interdum eleifend. Nullam vestibulum nisl nulla, ac consectetur lectus sollicitudin id. Vivamus a ullamcorper risus.",
-                                    style: Styles.headlineStyle3.copyWith(
-                                        color: Styles.bgColor,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.normal),
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 3,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ]),
-
-                          // TEST
-                          Stack(alignment: Alignment.bottomCenter, children: [
-                            Container(
-                              height: 360,
-                              width: 260,
-                              margin: EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 10),
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 16, horizontal: 0),
-                              decoration: BoxDecoration(
-                                color: Styles.greyCardColor,
-                                borderRadius: BorderRadius.circular(25),
-                                image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: AssetImage(
-                                        "assets/images/Medved-Sneznik-0002.jpg")),
-                              ),
-                              child: Column(
-                                children: [
-                                  // Container for image
-                                ],
-                              ),
-                            ),
-
-                            // Overlay Container
-                            Container(
-                              height: 100,
-                              width: 230,
-                              margin: EdgeInsets.only(bottom: 16),
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 14, vertical: 10),
-                              decoration: BoxDecoration(
-                                  color: Color(0xFFEDEDED).withOpacity(0.85),
-                                  borderRadius: BorderRadius.circular(25)),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Sample Artifact",
-                                    style: Styles.headlineStyle3.copyWith(
-                                        color: Styles.bgColor, fontSize: 20),
-                                    textAlign: TextAlign.left,
-                                  ),
-                                  SizedBox(
-                                    height: 8,
-                                  ),
-                                  Text(
-                                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque turpis nulla, rutrum id porttitor et, porta id ante. Curabitur sollicitudin sodales sapien a tempus. Curabitur bibendum dolor at metus interdum eleifend. Nullam vestibulum nisl nulla, ac consectetur lectus sollicitudin id. Vivamus a ullamcorper risus.",
-                                    style: Styles.headlineStyle3.copyWith(
-                                        color: Styles.bgColor,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.normal),
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 3,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ]),
-
-                          // TEST
-                          Stack(alignment: Alignment.bottomCenter, children: [
-                            Container(
-                              height: 360,
-                              width: 260,
-                              margin: EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 10),
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 16, horizontal: 0),
-                              decoration: BoxDecoration(
-                                color: Styles.greyCardColor,
-                                borderRadius: BorderRadius.circular(25),
-                                image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: AssetImage(
-                                        "assets/images/Medved-Sneznik-0002.jpg")),
-                              ),
-                              child: Column(
-                                children: [
-                                  // Container for image
-                                ],
-                              ),
-                            ),
-
-                            // Overlay Container
-                            Container(
-                              height: 100,
-                              width: 230,
-                              margin: EdgeInsets.only(bottom: 16),
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 14, vertical: 10),
-                              decoration: BoxDecoration(
-                                  color: Color(0xFFEDEDED).withOpacity(0.85),
-                                  borderRadius: BorderRadius.circular(25)),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Sample Artifact",
-                                    style: Styles.headlineStyle3.copyWith(
-                                        color: Styles.bgColor, fontSize: 20),
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  SizedBox(
-                                    height: 8,
-                                  ),
-                                  Text(
-                                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque turpis nulla, rutrum id porttitor et, porta id ante. Curabitur sollicitudin sodales sapien a tempus. Curabitur bibendum dolor at metus interdum eleifend. Nullam vestibulum nisl nulla, ac consectetur lectus sollicitudin id. Vivamus a ullamcorper risus.",
-                                    style: Styles.headlineStyle3.copyWith(
-                                        color: Styles.bgColor,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.normal),
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 3,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ]),
                         ],
                       )),
                 ]),

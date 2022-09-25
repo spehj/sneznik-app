@@ -5,6 +5,10 @@ List<Map<String, dynamic>> floorInfoList = [
     "description":
     "Meet the great brown bear, explore magnificent dining hall, experience the wedding room...",
     "image": "Medved-Sneznik-0002.jpg",
+    "floor_content":{
+      ""
+
+    }
   },
   {
     "header": "First Floor",
@@ -26,3 +30,68 @@ List<Map<String, dynamic>> floorInfoList = [
   },
 
 ];
+
+List<Map<String, dynamic>> basementInfo = [
+  {"room_name": "Hallway",
+    "room_image": "IMG_3278_grad_sneznik_porocna_dvorana_big.jpg"
+  },
+  {"room_name": "Castle cellar",
+    "room_image": "IMG_3278_grad_sneznik_porocna_dvorana_big.jpg"
+  },
+
+];
+
+List<Map<String, dynamic>> firstFloorInfo = [
+  {"room_name": "Hallway",
+  "room_image": "IMG_3278_grad_sneznik_porocna_dvorana_big.jpg"
+  },
+  {"room_name": "Dining Room",
+    "room_image": "IMG_3278_grad_sneznik_porocna_dvorana_big.jpg"
+  },
+  {"room_name": "Wedding Room",
+    "room_image": "IMG_3278_grad_sneznik_porocna_dvorana_big.jpg"
+  },
+  {"room_name": "Wedding Room",
+    "room_image": "IMG_3278_grad_sneznik_porocna_dvorana_big.jpg"
+  }
+];
+
+List<Map<String, dynamic>> secondFloorInfo = [
+  {"room_name": "Room 1",
+    "room_image": "IMG_3278_grad_sneznik_porocna_dvorana_big.jpg"
+  },
+  {"room_name": "Room 2",
+    "room_image": "IMG_3278_grad_sneznik_porocna_dvorana_big.jpg"
+  },
+  {"room_name": "Hallway",
+    "room_image": "IMG_3278_grad_sneznik_porocna_dvorana_big.jpg"
+  },
+  {"room_name": "Room 3",
+    "room_image": "IMG_3278_grad_sneznik_porocna_dvorana_big.jpg"
+  },
+  {"room_name": "Room 4",
+    "room_image": "IMG_3278_grad_sneznik_porocna_dvorana_big.jpg"
+  },
+  {"room_name": "Room 5",
+    "room_image": "IMG_3278_grad_sneznik_porocna_dvorana_big.jpg"
+  }
+];
+
+List<Map<String, dynamic>> thirdFloorInfo = [
+  {"room_name": "Room 1",
+    "room_image": "IMG_3278_grad_sneznik_porocna_dvorana_big.jpg"
+  },
+  {"room_name": "Room 2",
+    "room_image": "IMG_3278_grad_sneznik_porocna_dvorana_big.jpg"
+  },
+  {"room_name": "Hallway",
+    "room_image": "IMG_3278_grad_sneznik_porocna_dvorana_big.jpg"
+  },
+  {"room_name": "Room 3",
+    "room_image": "IMG_3278_grad_sneznik_porocna_dvorana_big.jpg"
+  },
+  {"room_name": "Room 4",
+    "room_image": "IMG_3278_grad_sneznik_porocna_dvorana_big.jpg"
+  }
+];
+

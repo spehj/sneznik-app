@@ -12,7 +12,7 @@ class CategoryScreen extends StatelessWidget {
       backgroundColor: Styles.bgColor,
       body: Container(
         margin: EdgeInsets.only(top: 30),
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+        padding: EdgeInsets.only(left: 16, right: 16, top: 12),
         child: Column(children: [
           SizedBox(
             height: 30,
@@ -70,7 +70,7 @@ class CategoryScreen extends StatelessWidget {
           // Floor plan
           Expanded(
             child: ListView(
-                padding: EdgeInsets.only(top: 20, bottom: 30),
+                padding: EdgeInsets.only(top: 20, bottom: 10),
                 children: [
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
