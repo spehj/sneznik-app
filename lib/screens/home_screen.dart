@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sneznik_app/screens/category_screen.dart';
 import 'package:sneznik_app/utils/home_info_list.dart';
 import 'package:sneznik_app/widgets/floor_card_widget.dart';
 
@@ -9,10 +10,15 @@ import '../utils/mocked_categories.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
 
-  List<Category> categories = Utils.getMockedCategories();
+  //List<Category> categories = Utils.getMockedCategories();
+
+  final categories = Category.fetchAll();
+
+
 
   @override
   Widget build(BuildContext context) {
+    print("categories length: ${categories.length}");
     return Scaffold(
       backgroundColor: Styles.bgColor,
       body: Container(
@@ -83,19 +89,28 @@ class HomeScreen extends StatelessWidget {
                         style: Styles.headlineStyle2,
                         textAlign: TextAlign.left,
                       )),
-                  Expanded(
-                      child: ListView.builder(
+                  ListView.builder(
                         padding: EdgeInsets.only(top: 20),
                         shrinkWrap: true,
                         physics: const ScrollPhysics(),
                         itemCount: categories.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return FloorCard(
-                              headerText: categories[index].categoryName,
-                              cardImage: categories[index].categoryImage,
-                              descText: categories[index].categoryDescription);
+                          return GestureDetector(
+                            onTap: (){
+                              print("Tapped ${categories[index].categoryName}");
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context)=>CategoryScreen(categoryName: categories[index].categoryName, categoryDescription: categories[index].categoryDescription, categoryImage: categories[index].categoryImage, categoryMap: categories[index].categoryMap,
+
+                                  )));
+                            },
+                            child: FloorCard(
+                                headerText: categories[index].categoryName,
+                                cardImage: categories[index].categoryImage,
+                                descText: categories[index].categoryDescription),
+                          );
                     },
-                  ))
+                  ),
                   // Column(
                   //     children: floorInfoList
                   //         .map((singleCard) => FloorCard(

@@ -1,13 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../models/subcategory_model.dart';
 import '../utils/app_styles.dart';
 
 class CategoryScreen extends StatelessWidget {
-  const CategoryScreen({Key? key}) : super(key: key);
+  final String categoryName;
+  final String categoryImage;
+  final String categoryDescription;
+  final String categoryMap;
+  const CategoryScreen({Key? key, required this.categoryName, required this.categoryImage, required this.categoryDescription, required this.categoryMap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final subcategories = Subcategory.fetchSubcategories(categoryName);
+    //print("Categories: ${subcategories}");
     return Scaffold(
       backgroundColor: Styles.bgColor,
       body: Container(
@@ -41,7 +48,7 @@ class CategoryScreen extends StatelessWidget {
 
               // TODO: change with a variable
               Text(
-                "First Floor",
+                categoryName,
                 style: Styles.headlineStyle2,
               ),
             ],
@@ -59,7 +66,7 @@ class CategoryScreen extends StatelessWidget {
             child: SizedBox(
               width: double.infinity,
               child: Text(
-                "Description",
+                categoryDescription,
                 style:
                     Styles.headlineStyle2.copyWith(color: Styles.greyTextColor),
                 textAlign: TextAlign.start,
@@ -81,7 +88,7 @@ class CategoryScreen extends StatelessWidget {
                       color: Colors.white,
                       image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: AssetImage("assets/images/castle-floor.jpg")),
+                          image: AssetImage("assets/images/$categoryMap")),
                     ),
                   ),
                   SizedBox(
@@ -103,7 +110,7 @@ class CategoryScreen extends StatelessWidget {
                       padding: EdgeInsets.only(top: 20),
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      crossAxisCount: 2,
+                      crossAxisCount: 1,
                       childAspectRatio: 0.75,
                       crossAxisSpacing: 15,
                       mainAxisSpacing: 15,
@@ -114,8 +121,7 @@ class CategoryScreen extends StatelessWidget {
                           child: GridTile(
                             footer: GridTileBar(
                               backgroundColor: Styles.darkGrayColor,
-                              title: Text(
-                                "Wedding Room for Guests",
+                              title: Text("_subcategoryName",
                                 textAlign: TextAlign.center,
                                 style: Styles.headlineStyle3
                                     .copyWith(fontWeight: FontWeight.w500),
