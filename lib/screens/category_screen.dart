@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sneznik_app/widgets/subcategory_widget.dart';
 
 import '../models/subcategory_model.dart';
 import '../utils/app_styles.dart';
@@ -40,8 +41,8 @@ class CategoryScreen extends StatelessWidget {
                         side:
                             BorderSide(width: 2, color: Styles.whiteIconColor)),
                     //padding: EdgeInsets.all(8),
-                    primary: Styles.bgColor, // <-- Button color
-                    onPrimary: Styles.oceanBlueColor, // <-- Splash color
+                    backgroundColor: Styles.bgColor, // <-- Button color
+                    foregroundColor: Styles.oceanBlueColor, // <-- Splash color
                   ),
                 ),
               ),
@@ -68,7 +69,7 @@ class CategoryScreen extends StatelessWidget {
               child: Text(
                 categoryDescription,
                 style:
-                    Styles.headlineStyle2.copyWith(color: Styles.greyTextColor),
+                    Styles.headlineStyle3.copyWith(color: Styles.greyTextColor),
                 textAlign: TextAlign.start,
               ),
             ),
@@ -105,46 +106,26 @@ class CategoryScreen extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                  Stack(children: [
-                    GridView.count(
-                      padding: EdgeInsets.only(top: 20),
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      crossAxisCount: 1,
-                      childAspectRatio: 0.75,
-                      crossAxisSpacing: 15,
-                      mainAxisSpacing: 15,
-                      children: List.generate(6, (index) {
-                        return ClipRRect(
-
-                          borderRadius: BorderRadius.circular(20),
-                          child: GridTile(
-                            footer: GridTileBar(
-                              backgroundColor: Styles.darkGrayColor,
-                              title: Text("_subcategoryName",
-                                textAlign: TextAlign.center,
-                                style: Styles.headlineStyle3
-                                    .copyWith(fontWeight: FontWeight.w500),
-                              ),
-                            ),
-                            child: GestureDetector(
-                              onTap: () {
-                                // Add action
-                                // Navigator.of(context).pushNamed(
-                                //     BookDetailScreen.routeName,
-                                //     arguments: product.id,
-                                // );
-                              },
-                              child: Image.asset(
-                                "assets/images/IMG_3278_grad_sneznik_porocna_dvorana_big.jpg",
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                        );
-                      }),
-                    ),
-                  ]),
+                  Expanded(child: ListView.builder(
+                    padding: EdgeInsets.only(top: 20),
+                    shrinkWrap: true,
+                    physics: const ScrollPhysics(),
+                    itemCount: subcategories?.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return GestureDetector(
+                        onTap: (){
+                          print("Tapped ${subcategories?[index].categoryName}");
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(builder: (context)=>CategoryScreen(categoryName: subcategories[index]?.categoryName, categoryDescription: categories[index].categoryDescription, categoryImage: categories[index].categoryImage, categoryMap: categories[index].categoryMap,
+                          //
+                          //     )));
+                        },
+                        child:
+                          SubcatCard(subcategoryName: subcategories?[index].subcategoryName, subcategoryImage: subcategories?[index].subcategoryImage,)
+                      );
+                    },
+                  ),)
                 ]),
           )
         ]),

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/app_styles.dart';
+import 'next_widget.dart';
 
 class FloorCard extends StatelessWidget {
   final String headerText;
@@ -24,43 +25,35 @@ class FloorCard extends StatelessWidget {
               image: AssetImage(
                   "assets/images/${cardImage}"))
       ),
-      child: Column(
+      child: Stack(
+        alignment: Alignment.center,
         children: [
-          SizedBox(
-              width: double.infinity,
+            Positioned(
+              top: 0,
+              left:0,
               child: Text(
-                headerText,
-                style: Styles.headlineStyle2,
-                textAlign: TextAlign.left,
-              )),
-          SizedBox(
-            height: 10,
-          ),
-          SizedBox(
-              width: double.infinity,
-              child: Text(
-                descText.length > 50
-                    ? descText.substring(0, 50) + '...'
-                    : descText,
-                style: Styles.textStyle.copyWith(fontSize: 18),
-                textAlign: TextAlign.left,
+                    headerText,
+                    style: Styles.headlineStyle2,
+                    textAlign: TextAlign.left,
+                  ),
+            ),
 
-              )),
-          SizedBox(
-            height: 10,
-          ),
-          ElevatedButton(
-            onPressed: () {},
-            child: Text("Discover more"),
-            style: ElevatedButton.styleFrom(
-                primary: Styles.oceanBlueColor,
-                padding: EdgeInsets.symmetric(
-                    horizontal: 20, vertical: 16),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12))),
-          )
-        ],
-      ),
+            Positioned(
+              child: Text(
+
+                    descText.length > 60
+                        ? descText.substring(0, 60) + '...'
+                        : descText,
+                    style: Styles.textStyle.copyWith(fontSize: 18),
+                    textAlign: TextAlign.left,
+
+                  ),
+            ),
+            Positioned(top:0, right:0,child: NextCard()),
+
+
+          ],
+        ),
     );
   }
 }
