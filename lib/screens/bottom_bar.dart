@@ -44,6 +44,7 @@ class _BottomBarState extends State<BottomBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       backgroundColor: Styles.bgColor, //Styles.bgColor
       body: Center(child: _widgetOptions[_selectedIndex]),
       bottomNavigationBar: ClipRRect(

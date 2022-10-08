@@ -12,7 +12,8 @@ class Category {
 
   List<Subcategory> subcategories;
   Category({required this.categoryName, required this.categoryDescription, required this.categoryImage, required this.categoryMap, required this.subcategories});
-  
+
+
   
   static List<Category> fetchAll(){
     return [

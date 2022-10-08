@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "104113755904",
+    "project_id": "sneznik-app",
+    "storage_bucket": "sneznik-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:104113755904:android:75c9817d97b413854e05e5",
+        "android_client_info": {
+          "package_name": "com.example.sneznik_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "104113755904-p8k6rs0dh5mmupmgo1r9u9lrk2qk956g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPg3mHDgVN2383K7C8peK5jXp7veL5M4U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "104113755904-p8k6rs0dh5mmupmgo1r9u9lrk2qk956g.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "104113755904-e9gqdblqgqpjph75pprsubu3vramu4ks.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.sneznikApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
