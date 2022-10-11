@@ -10,11 +10,18 @@ class CategoryScreen extends StatelessWidget {
   final String categoryImage;
   final String categoryDescription;
   final String categoryMap;
-  const CategoryScreen({Key? key, required this.categoryName, required this.categoryImage, required this.categoryDescription, required this.categoryMap}) : super(key: key);
+
+  const CategoryScreen(
+      {Key? key,
+      required this.categoryName,
+      required this.categoryImage,
+      required this.categoryDescription,
+      required this.categoryMap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final subcategories = Subcategory.fetchSubcategories(categoryName);
+    final subcategories = []; //Subcategory.fetchSubcategories(categoryName);
     //print("Categories: ${subcategories}");
     return Scaffold(
       backgroundColor: Styles.bgColor,
@@ -106,26 +113,33 @@ class CategoryScreen extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                  Expanded(child: ListView.builder(
-                    padding: EdgeInsets.only(top: 20),
-                    shrinkWrap: true,
-                    physics: const ScrollPhysics(),
-                    itemCount: subcategories?.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return GestureDetector(
-                        onTap: (){
-                          print("Tapped ${subcategories?[index].categoryName}");
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(builder: (context)=>CategoryScreen(categoryName: subcategories[index]?.categoryName, categoryDescription: categories[index].categoryDescription, categoryImage: categories[index].categoryImage, categoryMap: categories[index].categoryMap,
-                          //
-                          //     )));
-                        },
-                        child:
-                          SubcatCard(subcategoryName: subcategories?[index].subcategoryName, subcategoryImage: subcategories?[index].subcategoryImage,)
-                      );
-                    },
-                  ),)
+                  //Expanded(
+                    //child:
+                    ListView.builder(
+                      padding: EdgeInsets.only(top: 20),
+                      shrinkWrap: true,
+                      physics: const ScrollPhysics(),
+                      itemCount: subcategories?.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return GestureDetector(
+                            onTap: () {
+                              print(
+                                  "Tapped ${subcategories?[index].categoryName}");
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(builder: (context)=>CategoryScreen(categoryName: subcategories[index]?.categoryName, categoryDescription: categories[index].categoryDescription, categoryImage: categories[index].categoryImage, categoryMap: categories[index].categoryMap,
+                              //
+                              //     )));
+                            },
+                            child: SubcatCard(
+                              subcategoryName:
+                                  subcategories?[index].subcategoryName,
+                              subcategoryImage:
+                                  subcategories?[index].subcategoryImage,
+                            ));
+                      },
+                    ),
+                  //)
                 ]),
           )
         ]),

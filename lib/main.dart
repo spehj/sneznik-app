@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:sneznik_app/screens/bottom_bar.dart';
+import 'package:sneznik_app/services/category_service.dart';
 import 'package:sneznik_app/utils/app_styles.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -10,7 +12,8 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  // runApp(MultiProvider(providers: [Provider(create: (_) => CategoryService())], child: const MyApp(),));
+  runApp( const MyApp());
 }
 
 class MyApp extends StatelessWidget {

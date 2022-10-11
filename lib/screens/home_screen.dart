@@ -1,24 +1,65 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sneznik_app/screens/category_screen.dart';
+import 'package:sneznik_app/services/category_service.dart';
 import 'package:sneznik_app/utils/home_info_list.dart';
 import 'package:sneznik_app/widgets/floor_card_widget.dart';
 
 import '../models/category_model.dart';
 import '../utils/app_styles.dart';
 import '../utils/mocked_categories.dart';
+import '../widgets/categories_list_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
 
-  //List<Category> categories = Utils.getMockedCategories();
+  List<Category> categories = Utils.getMockedCategories();
 
-  final categories = Category.fetchAll();
+  //final categories = Category.fetchAll();
+  //var obj = Category.fromJson(myMap);
+  // final _museum = FirebaseFirestore.instance.collection("museum");
+  // final _museum = FirebaseFirestore.instance.collection("museum").doc("YQXURRlJxRsCZpmRvhG2");
+
+  //final CollectionReference _categories = FirebaseFirestore.instance.collection("museum").doc()
+
 
 
 
   @override
   Widget build(BuildContext context) {
-    print("categories length: ${categories.length}");
+    // print("Museum: ${_museum}");
+    // print("--------------");
+    // CategoryService categoryService = new CategoryService();
+    // categoryService.getCategoriesCollectionFromFirebase();
+    // //print("categories length: ${categories.length}");
+    // //CategoryService catService = Provider.of<CategoryService>(context, listen: false);
+    // //print("Object: ${myMap}");
+    // Future.delayed(Duration(seconds: 2), () async{
+    //   //FirebaseApp app = await Firebase.initializeApp();
+    //   catService.getCategoriesCollectionFromFirebase();
+    //   // catService.getCategoriesCollectionFromFirebase().then((value){
+    //   //     //CategoryService catSelection = Provider.of<CategoryService>(context, listen: false);
+    //   //     categories = catService.getCategories();
+    //   // });
+    // });
+    // FutureBuilder<List<Category>>(
+    //   future: null,
+    //   builder: (context, snapshot){
+    //     if(snapshot.hasError){
+    //       return Center(child: Text("Something went wrong."));
+    //     }
+    //     else if (snapshot.hasData){
+    //       final categories = snapshot.data!;
+    //       return Center(child: Text("Cool"),);
+    //     }
+    //     else{
+    //       return const Center(child: CircularProgressIndicator(),);
+    //     }
+    //   }
+    // );
+
     return Scaffold(
       backgroundColor: Styles.bgColor,
       body: Container(
@@ -89,35 +130,10 @@ class HomeScreen extends StatelessWidget {
                         style: Styles.headlineStyle2,
                         textAlign: TextAlign.left,
                       )),
-                  ListView.builder(
-                        padding: EdgeInsets.only(top: 20),
-                        shrinkWrap: true,
-                        physics: const ScrollPhysics(),
-                        itemCount: categories.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return GestureDetector(
-                            onTap: (){
-                              print("Tapped ${categories[index].categoryName}");
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context)=>CategoryScreen(categoryName: categories[index].categoryName, categoryDescription: categories[index].categoryDescription, categoryImage: categories[index].categoryImage, categoryMap: categories[index].categoryMap,
-
-                                  )));
-                            },
-                            child: FloorCard(
-                                headerText: categories[index].categoryName,
-                                cardImage: categories[index].categoryImage,
-                                descText: categories[index].categoryDescription),
-                          );
-                    },
+                  CategoryListWidget(),
+                  SizedBox(
+                    height: 50,
                   ),
-                  // Column(
-                  //     children: floorInfoList
-                  //         .map((singleCard) => FloorCard(
-                  //             headerText: singleCard["header"],
-                  //             cardImage: singleCard["image"],
-                  //             descText: singleCard["description"]))
-                  //         .toList())
                 ],
               ),
             ),
