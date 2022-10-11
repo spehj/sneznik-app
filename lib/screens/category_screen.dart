@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sneznik_app/widgets/subcategories_list_widget.dart';
 import 'package:sneznik_app/widgets/subcategory_widget.dart';
 
 import '../models/subcategory_model.dart';
 import '../utils/app_styles.dart';
 
 class CategoryScreen extends StatelessWidget {
+  final String categoryId;
   final String categoryName;
   final String categoryImage;
   final String categoryDescription;
@@ -13,6 +15,7 @@ class CategoryScreen extends StatelessWidget {
 
   const CategoryScreen(
       {Key? key,
+        required this.categoryId,
       required this.categoryName,
       required this.categoryImage,
       required this.categoryDescription,
@@ -113,33 +116,32 @@ class CategoryScreen extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                  //Expanded(
-                    //child:
-                    ListView.builder(
-                      padding: EdgeInsets.only(top: 20),
-                      shrinkWrap: true,
-                      physics: const ScrollPhysics(),
-                      itemCount: subcategories?.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return GestureDetector(
-                            onTap: () {
-                              print(
-                                  "Tapped ${subcategories?[index].categoryName}");
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(builder: (context)=>CategoryScreen(categoryName: subcategories[index]?.categoryName, categoryDescription: categories[index].categoryDescription, categoryImage: categories[index].categoryImage, categoryMap: categories[index].categoryMap,
-                              //
-                              //     )));
-                            },
-                            child: SubcatCard(
-                              subcategoryName:
-                                  subcategories?[index].subcategoryName,
-                              subcategoryImage:
-                                  subcategories?[index].subcategoryImage,
-                            ));
-                      },
-                    ),
-                  //)
+                    SubcategoriesListWidget(categoryId: categoryId),
+                    // ListView.builder(
+                    //   padding: EdgeInsets.only(top: 20),
+                    //   shrinkWrap: true,
+                    //   physics: const ScrollPhysics(),
+                    //   itemCount: subcategories?.length,
+                    //   itemBuilder: (BuildContext context, int index) {
+                    //     return GestureDetector(
+                    //         onTap: () {
+                    //           print(
+                    //               "Tapped ${subcategories?[index].categoryName}");
+                    //           // Navigator.push(
+                    //           //     context,
+                    //           //     MaterialPageRoute(builder: (context)=>CategoryScreen(categoryName: subcategories[index]?.categoryName, categoryDescription: categories[index].categoryDescription, categoryImage: categories[index].categoryImage, categoryMap: categories[index].categoryMap,
+                    //           //
+                    //           //     )));
+                    //         },
+                    //         child: SubcatCard(
+                    //           subcategoryName:
+                    //               subcategories?[index].subcategoryName,
+                    //           subcategoryImage:
+                    //               subcategories?[index].subcategoryImage,
+                    //         ));
+                    //   },
+                    // ),
+
                 ]),
           )
         ]),

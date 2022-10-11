@@ -41,20 +41,6 @@ class SubcatCard extends StatelessWidget {
           Positioned(top: 0, right: 0, child: NextCard()),
         ],
       ),
-      // child: Column(
-      //   children: [
-      //     SizedBox(
-      //         width: double.infinity,
-      //         child: Text(
-      //           subcategoryName!,
-      //           style: Styles.headlineStyle2,
-      //           textAlign: TextAlign.left,
-      //         )),
-      //     SizedBox(
-      //       height: 10,
-      //     ),
-      //   ],
-      // ),
     );
   }
 }

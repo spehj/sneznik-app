@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../utils/app_styles.dart';
-import '../../widgets/app_icon.dart';
+import '../utils/app_styles.dart';
+import '../widgets/app_icon.dart';
 
 class ArtefactDetail extends StatelessWidget {
   const ArtefactDetail({Key? key}) : super(key: key);

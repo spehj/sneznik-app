@@ -1,7 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sneznik_app/screens/artefacts/artefacts_detail.dart';
+import 'package:sneznik_app/screens/artefacts_detail.dart';
 import 'package:sneznik_app/screens/category_screen.dart';
 import 'package:sneznik_app/screens/favorites_screen.dart';
 import 'package:sneznik_app/screens/subcategory_screen.dart';
@@ -26,7 +26,7 @@ class _BottomBarState extends State<BottomBar> {
     HomeScreen(),
     //const CategoryScreen(),
     const ArtefactDetail(),
-    const SubcategoryScreen(),
+    //const SubcategoryScreen(),
     // const Text("Tickets"),
     // const Text("Profile"),
 

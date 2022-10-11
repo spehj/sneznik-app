@@ -82,6 +82,7 @@ class _CategoryListWidgetState extends State<CategoryListWidget> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => CategoryScreen(
+                                    categoryId: categories[index].categoryId,
                                         categoryName:
                                             categories[index].categoryName,
                                         //categories[index].categoryName,

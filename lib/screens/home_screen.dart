@@ -29,36 +29,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print("Museum: ${_museum}");
-    // print("--------------");
-    // CategoryService categoryService = new CategoryService();
-    // categoryService.getCategoriesCollectionFromFirebase();
-    // //print("categories length: ${categories.length}");
-    // //CategoryService catService = Provider.of<CategoryService>(context, listen: false);
-    // //print("Object: ${myMap}");
-    // Future.delayed(Duration(seconds: 2), () async{
-    //   //FirebaseApp app = await Firebase.initializeApp();
-    //   catService.getCategoriesCollectionFromFirebase();
-    //   // catService.getCategoriesCollectionFromFirebase().then((value){
-    //   //     //CategoryService catSelection = Provider.of<CategoryService>(context, listen: false);
-    //   //     categories = catService.getCategories();
-    //   // });
-    // });
-    // FutureBuilder<List<Category>>(
-    //   future: null,
-    //   builder: (context, snapshot){
-    //     if(snapshot.hasError){
-    //       return Center(child: Text("Something went wrong."));
-    //     }
-    //     else if (snapshot.hasData){
-    //       final categories = snapshot.data!;
-    //       return Center(child: Text("Cool"),);
-    //     }
-    //     else{
-    //       return const Center(child: CircularProgressIndicator(),);
-    //     }
-    //   }
-    // );
 
     return Scaffold(
       backgroundColor: Styles.bgColor,

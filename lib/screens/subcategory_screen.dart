@@ -5,17 +5,26 @@ import 'package:sneznik_app/widgets/artefact_widget.dart';
 import '../utils/app_styles.dart';
 
 class SubcategoryScreen extends StatelessWidget {
-  const SubcategoryScreen({Key? key}) : super(key: key);
+  final String subcategoryId;
+  final String subcategoryName;
+  final String subcategoryImage;
+  final String subcategoryDescription;
+
+  const SubcategoryScreen(
+      {Key? key,
+      required this.subcategoryId,
+      required this.subcategoryName,
+      required this.subcategoryDescription,
+      required this.subcategoryImage})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       backgroundColor: Styles.bgColor,
       body: Container(
         margin: EdgeInsets.only(top: 30),
-        padding: EdgeInsets.only(left:16, right: 16, top: 12),
+        padding: EdgeInsets.only(left: 16, right: 16, top: 12),
         child: Column(children: [
           SizedBox(
             height: 30,
@@ -109,7 +118,7 @@ class SubcategoryScreen extends StatelessWidget {
                       image: DecorationImage(
                           fit: BoxFit.cover,
                           image: AssetImage(
-                              "assets/images/Grad-Snežnik-00003.jpg")),
+                              "assets/images/$subcategoryImage")),
                     ),
                   ),
                   SizedBox(
@@ -117,14 +126,14 @@ class SubcategoryScreen extends StatelessWidget {
                   ),
                   Center(
                       child: Text(
-                    "Room 1",
+                    subcategoryName,
                     style: Styles.headlineStyle2,
                   )),
                   SizedBox(
                     height: 10,
                   ),
                   Text(
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et doa aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. \n\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                    subcategoryDescription,
                     style: Styles.textStyle,
                   ),
                   SizedBox(
@@ -135,11 +144,11 @@ class SubcategoryScreen extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: [
+                          // TODO: create a list of artefacts
                           ArtefactImage(),
                           ArtefactImage(),
                           ArtefactImage(),
                           ArtefactImage(),
-
                         ],
                       )),
                 ]),

@@ -13,7 +13,7 @@ class Utils {
           categoryDescription: "Meet the great brown bear, explore magnificent dining hall, experience the wedding room...",
           categoryImage: "Medved-Sneznik-0002.jpg",
           categoryMap: "castle-floor-plan.jpg",
-          subcategories: [],
+          //subcategories: [],
           categoryPosition: 0
       ),
       Category(
@@ -22,7 +22,7 @@ class Utils {
           categoryDescription: "Meet the great brown bear, explore magnificent dining hall, experience the wedding room...",
           categoryImage: "Medved-Sneznik-0002.jpg",
           categoryMap: "castle-floor-plan.jpg",
-          subcategories: [],
+          //subcategories: [],
           categoryPosition: 1
       ),
       Category(
@@ -31,7 +31,7 @@ class Utils {
           categoryDescription: "Meet the great brown bear, explore magnificent dining hall, experience the wedding room...",
           categoryImage: "Medved-Sneznik-0002.jpg",
           categoryMap: "castle-floor-plan.jpg",
-          subcategories: [],
+          // subcategories: [],
           categoryPosition: 2
       ),
       Category(
@@ -40,7 +40,7 @@ class Utils {
           categoryDescription: "Meet the great brown bear, explore magnificent dining hall, experience the wedding room...",
           categoryImage: "Medved-Sneznik-0002.jpg",
           categoryMap: "castle-floor-plan.jpg",
-          subcategories: [],
+          // subcategories: [],
           categoryPosition: 3
       ),
 
