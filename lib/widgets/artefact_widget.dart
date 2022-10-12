@@ -1,14 +1,12 @@
 import 'package:flutter/cupertino.dart';
+import 'package:sneznik_app/models/artefact_model.dart';
 
 import '../utils/app_styles.dart';
 
 class ArtefactImage extends StatelessWidget {
   final double listViewHeight;
-  final String artefactId;
-  final String artefactName;
-  final String artefactDescription;
-  final String artefactImageUrl;
-  const ArtefactImage({Key? key, required this.listViewHeight, required this.artefactId, required this.artefactName, required this.artefactImageUrl, required this.artefactDescription}) : super(key: key);
+  final Artefact sinlgeArtefact;
+  const ArtefactImage({Key? key, required this.listViewHeight, required this.sinlgeArtefact}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +24,7 @@ class ArtefactImage extends StatelessWidget {
           image: DecorationImage(
               fit: BoxFit.cover,
               image: AssetImage(
-                  "assets/images/${artefactImageUrl}")),
+                  "assets/images/${sinlgeArtefact.artefactImageUrl}")),
         ),
         child: Column(
           children: [
@@ -49,7 +47,7 @@ class ArtefactImage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              artefactName,
+              sinlgeArtefact.artefactName,
               style: Styles.headlineStyle3.copyWith(
                   color: Styles.bgColor, fontSize: 20),
               textAlign: TextAlign.left,
@@ -58,7 +56,7 @@ class ArtefactImage extends StatelessWidget {
               height: 8,
             ),
             Text(
-              artefactDescription,
+              sinlgeArtefact.artefactDescription,
               style: Styles.headlineStyle3.copyWith(
                   color: Styles.bgColor,
                   fontSize: 14,

@@ -25,7 +25,7 @@ class _BottomBarState extends State<BottomBar> {
 
     HomeScreen(),
     //const CategoryScreen(),
-    const ArtefactDetail(),
+    //const ArtefactDetail(),
     //const SubcategoryScreen(),
     // const Text("Tickets"),
     // const Text("Profile"),

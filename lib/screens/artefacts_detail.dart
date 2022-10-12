@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sneznik_app/models/artefact_model.dart';
 
 import '../utils/app_styles.dart';
 import '../widgets/app_icon.dart';
 
 class ArtefactDetail extends StatelessWidget {
-  const ArtefactDetail({Key? key}) : super(key: key);
+  final Artefact singleArtefact;
+  const ArtefactDetail({Key? key, required this.singleArtefact}) : super(key: key);
   static const int imageSize = 350;
 
 
@@ -25,7 +27,7 @@ class ArtefactDetail extends StatelessWidget {
                       image: DecorationImage(
                           fit: BoxFit.cover,
                           image: AssetImage(
-                              "assets/images/Medved-Sneznik-0002.jpg"))),
+                              "assets/images/${singleArtefact.artefactImageUrl}"))),
                 )),
             Positioned(
                 top: 45,
@@ -57,7 +59,7 @@ class ArtefactDetail extends StatelessWidget {
                     child: Column(
                       children: [
                         Text(
-                          "Sample artefact",
+                          singleArtefact.artefactName,
                           style: Styles.headlineStyle2.copyWith(fontSize: 28),
                         ),
                         SizedBox(
@@ -67,7 +69,7 @@ class ArtefactDetail extends StatelessWidget {
                           child: SingleChildScrollView(
                             scrollDirection: Axis.vertical,
                             child: Text(
-                              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque turpis nulla, rutrum id porttitor et, porta id ante. Curabitur sollicitudin sodales sapien a tempus. Curabitur bibendum dolor at metus interdum eleifend. Nullam vestibulum nisl nulla, ac consectetur lectus sollicitudin id. Vivamus a ullamcorper risus. Proin vel erat tortor. Integer a eros scelerisque, dapibus lacus efficitur, dignissim neque. Suspendisse vitae odio eu ligula cursus volutpat eget non urna. Integer tortor erat, hendrerit nec magna tempor, imperdiet convallis arcu. Fusce elementum interdum velit. In eget ligula eu lectus eleifend interdum vitae at mi. Vestibulum consequat diam purus, quis facilisis odio consectetur at. Nunc eget dictum nulla. Morbi lorem ipsum, feugiat sed nulla et, euismod eleifend dolor. Quisque a sapien elementum, vulputate arcu ut, aliquam ipsum.",
+                              singleArtefact.artefactDescription,
                               style: Styles.textStyle,
                             ),
                           ),

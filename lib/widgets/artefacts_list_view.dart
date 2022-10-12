@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sneznik_app/models/artefact_model.dart';
+import 'package:sneznik_app/screens/artefacts_detail.dart';
 
 import '../utils/app_styles.dart';
 import 'artefact_widget.dart';
@@ -29,8 +30,6 @@ class _ArtefactsListViewState extends State<ArtefactsListView> {
   }
 
   Future<List<Artefact>> getArtefacts() async {
-    print(
-        "categoryID: ${widget.categoryId} subcategoryID: ${widget.subcategoryId}");
     List<Artefact> artefacts = [];
     CollectionReference categoriesReference = FirebaseFirestore.instance
         .collection("museum")
@@ -85,13 +84,10 @@ class _ArtefactsListViewState extends State<ArtefactsListView> {
                         return GestureDetector(
                           onTap: () {
                             print("Tapped ${artefacts?[index].artefactName}");
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => ArtefactDetail(singleArtefact: artefacts[index],)));
                           },
                           child: ArtefactImage(
-                            artefactId: artefacts[index].artefactId,
-                            artefactName: artefacts[index].artefactName,
-                            artefactDescription:
-                                artefacts[index].artefactDescription,
-                            artefactImageUrl: artefacts[index].artefactImageUrl,
+                            sinlgeArtefact: artefacts[index],
                             listViewHeight: listViewHeight,
                           ),
                         );

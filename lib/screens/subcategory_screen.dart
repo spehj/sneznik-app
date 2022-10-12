@@ -143,18 +143,11 @@ class SubcategoryScreen extends StatelessWidget {
                   ),
                   // Add horizontal scroll
                   ArtefactsListView(categoryId: categoryId, subcategoryId: subcategoryId),
-                  // SingleChildScrollView(
-                  //     scrollDirection: Axis.horizontal,
-                  //     child: Row(
-                  //       children: [
-                  //         // TODO: create a list of artefacts
-                  //         ArtefactImage(),
-                  //         ArtefactImage(),
-                  //         ArtefactImage(),
-                  //         ArtefactImage(),
-                  //       ],
-                  //     )),
+                  SizedBox(
+                    height: 50,
+                  ),
                 ]),
+
           ),
         ]),
       ),
