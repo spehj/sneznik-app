@@ -3,13 +3,18 @@ import 'package:flutter/cupertino.dart';
 import '../utils/app_styles.dart';
 
 class ArtefactImage extends StatelessWidget {
-  const ArtefactImage({Key? key}) : super(key: key);
+  final double listViewHeight;
+  final String artefactId;
+  final String artefactName;
+  final String artefactDescription;
+  final String artefactImageUrl;
+  const ArtefactImage({Key? key, required this.listViewHeight, required this.artefactId, required this.artefactName, required this.artefactImageUrl, required this.artefactDescription}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Stack(alignment: Alignment.bottomCenter, children: [
       Container(
-        height: 360,
+        height: listViewHeight-40,
         width: 260,
         margin: EdgeInsets.symmetric(
             horizontal: 10, vertical: 10),
@@ -21,7 +26,7 @@ class ArtefactImage extends StatelessWidget {
           image: DecorationImage(
               fit: BoxFit.cover,
               image: AssetImage(
-                  "assets/images/Medved-Sneznik-0002.jpg")),
+                  "assets/images/${artefactImageUrl}")),
         ),
         child: Column(
           children: [
@@ -44,7 +49,7 @@ class ArtefactImage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Sample Artifact",
+              artefactName,
               style: Styles.headlineStyle3.copyWith(
                   color: Styles.bgColor, fontSize: 20),
               textAlign: TextAlign.left,
@@ -53,7 +58,7 @@ class ArtefactImage extends StatelessWidget {
               height: 8,
             ),
             Text(
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque turpis nulla, rutrum id porttitor et, porta id ante. Curabitur sollicitudin sodales sapien a tempus. Curabitur bibendum dolor at metus interdum eleifend. Nullam vestibulum nisl nulla, ac consectetur lectus sollicitudin id. Vivamus a ullamcorper risus.",
+              artefactDescription,
               style: Styles.headlineStyle3.copyWith(
                   color: Styles.bgColor,
                   fontSize: 14,

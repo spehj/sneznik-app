@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sneznik_app/widgets/artefact_widget.dart';
+import 'package:sneznik_app/widgets/artefacts_list_view.dart';
 
 import '../utils/app_styles.dart';
 
 class SubcategoryScreen extends StatelessWidget {
+  final String categoryId;
   final String subcategoryId;
   final String subcategoryName;
   final String subcategoryImage;
@@ -12,6 +14,7 @@ class SubcategoryScreen extends StatelessWidget {
 
   const SubcategoryScreen(
       {Key? key,
+      required this.categoryId,
       required this.subcategoryId,
       required this.subcategoryName,
       required this.subcategoryDescription,
@@ -117,8 +120,7 @@ class SubcategoryScreen extends StatelessWidget {
                       color: Colors.white,
                       image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: AssetImage(
-                              "assets/images/$subcategoryImage")),
+                          image: AssetImage("assets/images/$subcategoryImage")),
                     ),
                   ),
                   SizedBox(
@@ -140,17 +142,18 @@ class SubcategoryScreen extends StatelessWidget {
                     height: 20,
                   ),
                   // Add horizontal scroll
-                  SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          // TODO: create a list of artefacts
-                          ArtefactImage(),
-                          ArtefactImage(),
-                          ArtefactImage(),
-                          ArtefactImage(),
-                        ],
-                      )),
+                  ArtefactsListView(categoryId: categoryId, subcategoryId: subcategoryId),
+                  // SingleChildScrollView(
+                  //     scrollDirection: Axis.horizontal,
+                  //     child: Row(
+                  //       children: [
+                  //         // TODO: create a list of artefacts
+                  //         ArtefactImage(),
+                  //         ArtefactImage(),
+                  //         ArtefactImage(),
+                  //         ArtefactImage(),
+                  //       ],
+                  //     )),
                 ]),
           ),
         ]),
