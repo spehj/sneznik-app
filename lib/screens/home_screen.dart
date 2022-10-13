@@ -58,7 +58,7 @@ class HomeScreen extends StatelessWidget {
                 Text(
                   "Snežnik Castle",
                   style: Styles.headlineStyle1
-                      .copyWith(color: Styles.greyTextColor),
+                      .copyWith(color: Styles.mainHeadlineColor),
                 ),
               ],
             ),

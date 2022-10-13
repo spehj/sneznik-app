@@ -1,31 +1,37 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sneznik_app/models/artefact_model.dart';
 
+import '../models/artefact_model.dart';
 import '../utils/app_styles.dart';
-import '../widgets/app_icon.dart';
+import 'app_icon.dart';
 
-class ArtefactDetail extends StatelessWidget {
+class ArtefactBottomSheet extends StatelessWidget {
   final Artefact singleArtefact;
-  const ArtefactDetail({Key? key, required this.singleArtefact}) : super(key: key);
-  static const int imageSize = 350;
 
+  const ArtefactBottomSheet({Key? key, required this.singleArtefact})
+      : super(key: key);
+  static const int imageSize = 350;
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        extendBody: true,
+    return DraggableScrollableSheet(
+        initialChildSize: 0.8,
+        maxChildSize: 1,
+        minChildSize: 0.6,
+        builder: (_, controller) {
+      return Scaffold(
+        backgroundColor: Colors.transparent,
+        //extendBody: true,
         body: Stack(
           children: [
             Positioned(
                 left: 0,
                 right: 0,
-
                 child: Container(
                   width: double.maxFinite,
                   height: 350,
                   decoration: BoxDecoration(
+                      borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
                       image: DecorationImage(
                           fit: BoxFit.cover,
                           image: AssetImage(
@@ -38,7 +44,11 @@ class ArtefactDetail extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    AppIcon(icon: Icons.arrow_back_ios),
+                    GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: AppIcon(icon: Icons.arrow_back_ios)),
                     AppIcon(icon: Icons.favorite),
                   ],
                 )),
@@ -49,14 +59,17 @@ class ArtefactDetail extends StatelessWidget {
                 top: 320,
                 // Same as image size (first Positioned in this Stack)
                 child: Container(
-                  padding: EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 60),
+                  padding:
+                      EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 60),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20)),
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(20),
+                        topLeft: Radius.circular(20)),
                     color: Styles.bgColor,
                   ),
                   child: Container(
                     width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height-imageSize,
+                    height: MediaQuery.of(context).size.height - imageSize,
                     padding: EdgeInsets.only(bottom: 0),
                     child: Column(
                       children: [
@@ -69,6 +82,7 @@ class ArtefactDetail extends StatelessWidget {
                         ),
                         Expanded(
                           child: SingleChildScrollView(
+                            controller: controller,
                             scrollDirection: Axis.vertical,
                             child: Text(
                               singleArtefact.artefactDescription,
@@ -85,7 +99,7 @@ class ArtefactDetail extends StatelessWidget {
                 ))
           ],
         ),
-      ),
-    );
+      );
+    });
   }
 }

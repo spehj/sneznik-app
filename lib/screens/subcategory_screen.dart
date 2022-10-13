@@ -36,8 +36,11 @@ class SubcategoryScreen extends StatelessWidget {
             children: [
               SizedBox(
                 height: 30,
+                // Back button
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   child: Icon(
                     Icons.close,
                     color: Styles.whiteIconColor,
@@ -68,7 +71,7 @@ class SubcategoryScreen extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {},
                 child: Icon(
-                  Icons.arrow_back,
+                  Icons.chevron_left_rounded,
                   color: Styles.whiteIconColor,
                   size: 26,
                 ),
@@ -81,7 +84,7 @@ class SubcategoryScreen extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {},
                 child: Icon(
-                  Icons.arrow_forward,
+                  Icons.chevron_right_rounded,
                   color: Styles.whiteIconColor,
                   size: 26,
                 ),
@@ -104,6 +107,9 @@ class SubcategoryScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(50),
               color: Styles.whiteIconColor,
             ),
+          ),
+          SizedBox(
+            height: 10,
           ),
 
           // Floor plan

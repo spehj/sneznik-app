@@ -20,7 +20,7 @@ class FloorCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           color: Colors.black,
           image: DecorationImage(
-              colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.4), BlendMode.dstATop),
+              colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.8), BlendMode.dstATop),
               fit: BoxFit.cover,
               image: AssetImage(
                   "assets/images/${cardImage}"))

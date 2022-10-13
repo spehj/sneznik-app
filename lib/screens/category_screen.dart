@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sneznik_app/widgets/next_widget.dart';
 import 'package:sneznik_app/widgets/subcategories_list_widget.dart';
 import 'package:sneznik_app/widgets/subcategory_widget.dart';
 
@@ -15,7 +16,7 @@ class CategoryScreen extends StatelessWidget {
 
   const CategoryScreen(
       {Key? key,
-        required this.categoryId,
+      required this.categoryId,
       required this.categoryName,
       required this.categoryImage,
       required this.categoryDescription,
@@ -24,7 +25,7 @@ class CategoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final subcategories = []; //Subcategory.fetchSubcategories(categoryName);
+    //final subcategories = []; //Subcategory.fetchSubcategories(categoryName);
     //print("Categories: ${subcategories}");
     return Scaffold(
       backgroundColor: Styles.bgColor,
@@ -36,44 +37,32 @@ class CategoryScreen extends StatelessWidget {
             height: 30,
           ),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(
-                height: 30,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: Icon(
-                    Icons.arrow_back,
-                    color: Styles.whiteIconColor,
-                    size: 20,
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    shape: CircleBorder(
-                        side:
-                            BorderSide(width: 2, color: Styles.whiteIconColor)),
-                    //padding: EdgeInsets.all(8),
-                    backgroundColor: Styles.bgColor, // <-- Button color
-                    foregroundColor: Styles.oceanBlueColor, // <-- Splash color
-                  ),
-                ),
-              ),
-
-              // TODO: change with a variable
+              GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: BackWidget(
+                    size: 50,
+                    iconColor: Styles.whiteIconColor,
+                  )),
               Text(
                 categoryName,
                 style: Styles.headlineStyle2,
+                textAlign: TextAlign.center,
               ),
             ],
           ),
           SizedBox(
-            height: 10,
+            height: 16,
           ),
           // Destination title
 
           // Description
 
           Padding(
-            padding: const EdgeInsets.only(left: 12, bottom: 12),
-            // TODO: fill with data from json
+            padding: const EdgeInsets.only(left: 12, bottom: 10),
             child: SizedBox(
               width: double.infinity,
               child: Text(
@@ -88,7 +77,7 @@ class CategoryScreen extends StatelessWidget {
           // Floor plan
           Expanded(
             child: ListView(
-                padding: EdgeInsets.only(top: 20, bottom: 10),
+                padding: EdgeInsets.only(top: 10, bottom: 10),
                 children: [
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
@@ -116,32 +105,31 @@ class CategoryScreen extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                    SubcategoriesListWidget(categoryId: categoryId),
-                    // ListView.builder(
-                    //   padding: EdgeInsets.only(top: 20),
-                    //   shrinkWrap: true,
-                    //   physics: const ScrollPhysics(),
-                    //   itemCount: subcategories?.length,
-                    //   itemBuilder: (BuildContext context, int index) {
-                    //     return GestureDetector(
-                    //         onTap: () {
-                    //           print(
-                    //               "Tapped ${subcategories?[index].categoryName}");
-                    //           // Navigator.push(
-                    //           //     context,
-                    //           //     MaterialPageRoute(builder: (context)=>CategoryScreen(categoryName: subcategories[index]?.categoryName, categoryDescription: categories[index].categoryDescription, categoryImage: categories[index].categoryImage, categoryMap: categories[index].categoryMap,
-                    //           //
-                    //           //     )));
-                    //         },
-                    //         child: SubcatCard(
-                    //           subcategoryName:
-                    //               subcategories?[index].subcategoryName,
-                    //           subcategoryImage:
-                    //               subcategories?[index].subcategoryImage,
-                    //         ));
-                    //   },
-                    // ),
-
+                  SubcategoriesListWidget(categoryId: categoryId),
+                  // ListView.builder(
+                  //   padding: EdgeInsets.only(top: 20),
+                  //   shrinkWrap: true,
+                  //   physics: const ScrollPhysics(),
+                  //   itemCount: subcategories?.length,
+                  //   itemBuilder: (BuildContext context, int index) {
+                  //     return GestureDetector(
+                  //         onTap: () {
+                  //           print(
+                  //               "Tapped ${subcategories?[index].categoryName}");
+                  //           // Navigator.push(
+                  //           //     context,
+                  //           //     MaterialPageRoute(builder: (context)=>CategoryScreen(categoryName: subcategories[index]?.categoryName, categoryDescription: categories[index].categoryDescription, categoryImage: categories[index].categoryImage, categoryMap: categories[index].categoryMap,
+                  //           //
+                  //           //     )));
+                  //         },
+                  //         child: SubcatCard(
+                  //           subcategoryName:
+                  //               subcategories?[index].subcategoryName,
+                  //           subcategoryImage:
+                  //               subcategories?[index].subcategoryImage,
+                  //         ));
+                  //   },
+                  // ),
                 ]),
           )
         ]),

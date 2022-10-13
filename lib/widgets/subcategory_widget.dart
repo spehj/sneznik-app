@@ -23,7 +23,7 @@ class SubcatCard extends StatelessWidget {
           color: Colors.black,
           image: DecorationImage(
               colorFilter: ColorFilter.mode(
-                  Colors.black.withOpacity(0.4), BlendMode.dstATop),
+                  Colors.black.withOpacity(0.8), BlendMode.dstATop),
               fit: BoxFit.cover,
               image: AssetImage("assets/images/${subcategoryImage}"))),
       child: Stack(

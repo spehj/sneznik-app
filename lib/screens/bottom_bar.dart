@@ -49,11 +49,11 @@ class _BottomBarState extends State<BottomBar> {
       body: Center(child: _widgetOptions[_selectedIndex]),
       bottomNavigationBar: ClipRRect(
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(25.0),
-            topRight: Radius.circular(25.0),
+            topLeft: Radius.circular(30.0),
+            topRight: Radius.circular(30.0),
           ),
           child: BottomNavigationBar(
-              backgroundColor: const Color(0xFF000000),
+              backgroundColor: Styles.bottomBarColor,
               type: BottomNavigationBarType.fixed,
               currentIndex: _selectedIndex,
               onTap: _onItemTapped,
@@ -61,7 +61,7 @@ class _BottomBarState extends State<BottomBar> {
               showSelectedLabels: false,
               showUnselectedLabels: false,
               selectedItemColor: Styles.whiteIconColor,
-              unselectedItemColor: const Color(0xFF526480),
+              unselectedItemColor: const Color(0xFF807F7F),
               items: const [
                 BottomNavigationBarItem(icon: Icon(Icons.home_outlined),
                     activeIcon: Icon(Icons.home),

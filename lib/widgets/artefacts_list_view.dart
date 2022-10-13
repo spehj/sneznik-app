@@ -5,6 +5,7 @@ import 'package:sneznik_app/models/artefact_model.dart';
 import 'package:sneznik_app/screens/artefacts_detail.dart';
 
 import '../utils/app_styles.dart';
+import 'artefact_bottom_sheet.dart';
 import 'artefact_widget.dart';
 
 class ArtefactsListView extends StatefulWidget {
@@ -24,8 +25,8 @@ class _ArtefactsListViewState extends State<ArtefactsListView> {
 
   @override
   void initState() {
+    print("Inside INIT...");
     super.initState();
-
     artefactFuture = getArtefacts();
   }
 
@@ -79,12 +80,23 @@ class _ArtefactsListViewState extends State<ArtefactsListView> {
                   child: ListView.builder(
                       //shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
-                      itemCount: artefacts?.length,
+                      itemCount: artefacts.length,
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
-                            print("Tapped ${artefacts?[index].artefactName}");
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => ArtefactDetail(singleArtefact: artefacts[index],)));
+                            print("Tapped ${artefacts[index].artefactName}");
+                            // Commented
+                            //Navigator.push(context, MaterialPageRoute(builder: (context) => ArtefactDetail(singleArtefact: artefacts[index],)));
+                            showModalBottomSheet(
+                                isScrollControlled: true,
+                                backgroundColor: Colors.transparent,
+
+                                context: context,
+                                builder: (context) {
+                                  return ArtefactBottomSheet(
+                                    singleArtefact: artefacts[index],
+                                  );
+                                });
                           },
                           child: ArtefactImage(
                             sinlgeArtefact: artefacts[index],
@@ -93,12 +105,6 @@ class _ArtefactsListViewState extends State<ArtefactsListView> {
                         );
                       }),
                 );
-                // return SingleChildScrollView(
-                //     scrollDirection: Axis.horizontal,
-                //     child: Row(
-                //         children: artefacts
-                //             .map((singleArtefact) => ArtefactImage())
-                //             .toList()));
               } else {
                 return CircularProgressIndicator();
               }
