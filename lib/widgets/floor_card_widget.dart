@@ -14,7 +14,7 @@ class FloorCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(vertical:10),
-      padding: EdgeInsets.only(left: 20, right: 20, top:20, bottom: 12),
+      //padding: EdgeInsets.only(left: 20, right: 20, top:20, bottom: 12),
       height: 180,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
@@ -29,8 +29,8 @@ class FloorCard extends StatelessWidget {
         alignment: Alignment.center,
         children: [
             Positioned(
-              top: 0,
-              left:0,
+              top: 15,
+              left:20,
               child: Text(
                     headerText,
                     style: Styles.headlineStyle2,
@@ -39,17 +39,38 @@ class FloorCard extends StatelessWidget {
             ),
 
             Positioned(
-              child: Text(
+              bottom: 10,
+              left: 20,
+              right: 20,
+              child: Container(
+                height: 70,
+                //width: 300,
+                //margin: EdgeInsets.only(bottom: 16),
+                padding: EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                decoration: BoxDecoration(
+                    color: Color(0xFFEDEDED).withOpacity(0.85),
+                    borderRadius: BorderRadius.circular(25)),
+                child: Text(
+                        descText.length > 60
+                            ? descText.substring(0, 60) + '...'
+                            : descText,
+                        style: Styles.textStyle.copyWith(fontSize: 18, color: Styles.blackTextColor),
+                        textAlign: TextAlign.left,
 
-                    descText.length > 60
-                        ? descText.substring(0, 60) + '...'
-                        : descText,
-                    style: Styles.textStyle.copyWith(fontSize: 18),
-                    textAlign: TextAlign.left,
+                      ),
+              ),
 
-                  ),
+              // child: Text(
+              //
+              //       descText.length > 60
+              //           ? descText.substring(0, 60) + '...'
+              //           : descText,
+              //       style: Styles.textStyle.copyWith(fontSize: 18),
+              //       textAlign: TextAlign.left,
+              //
+              //     ),
             ),
-            Positioned(top:0, right:0,child: NextCard()),
+            Positioned(top:15, right:20,child: NextCard()),
 
 
           ],

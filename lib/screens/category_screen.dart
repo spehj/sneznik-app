@@ -106,30 +106,7 @@ class CategoryScreen extends StatelessWidget {
                     height: 10,
                   ),
                   SubcategoriesListWidget(categoryId: categoryId),
-                  // ListView.builder(
-                  //   padding: EdgeInsets.only(top: 20),
-                  //   shrinkWrap: true,
-                  //   physics: const ScrollPhysics(),
-                  //   itemCount: subcategories?.length,
-                  //   itemBuilder: (BuildContext context, int index) {
-                  //     return GestureDetector(
-                  //         onTap: () {
-                  //           print(
-                  //               "Tapped ${subcategories?[index].categoryName}");
-                  //           // Navigator.push(
-                  //           //     context,
-                  //           //     MaterialPageRoute(builder: (context)=>CategoryScreen(categoryName: subcategories[index]?.categoryName, categoryDescription: categories[index].categoryDescription, categoryImage: categories[index].categoryImage, categoryMap: categories[index].categoryMap,
-                  //           //
-                  //           //     )));
-                  //         },
-                  //         child: SubcatCard(
-                  //           subcategoryName:
-                  //               subcategories?[index].subcategoryName,
-                  //           subcategoryImage:
-                  //               subcategories?[index].subcategoryImage,
-                  //         ));
-                  //   },
-                  // ),
+
                 ]),
           )
         ]),

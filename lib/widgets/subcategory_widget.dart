@@ -17,7 +17,7 @@ class SubcatCard extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       padding: EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 12),
-      height: 140,
+      height: 160,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           color: Colors.black,

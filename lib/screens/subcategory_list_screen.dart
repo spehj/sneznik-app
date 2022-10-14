@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sneznik_app/models/artefact_model.dart';
 import 'package:sneznik_app/services/firebase_services.dart';
+import 'package:sneznik_app/widgets/next_widget.dart';
 
 import '../models/subcategory_model.dart';
 import '../utils/app_styles.dart';
@@ -28,10 +29,6 @@ class SubcategoryListScreen extends StatefulWidget {
 }
 
 class _SubcategoryListScreenState extends State<SubcategoryListScreen> {
-  // getAllArtefacts()async{
-  //   var artefacts = await ArtefactServices().getArtefacts(widget.categoryId, widget.subcategories[subcategoryIndex].subcategoryId);
-  //   return artefacts;
-  // }
   late Future<List<Artefact>> artefactFuture;
   int subcategoryIndex = 0;
   int subcategoriesLength = 0;
@@ -44,21 +41,13 @@ class _SubcategoryListScreenState extends State<SubcategoryListScreen> {
     subcategoriesLength = widget.subcategories.length;
     artefactFuture = ArtefactService().getArtefacts(widget.categoryId,
         widget.subcategories[subcategoryIndex].subcategoryId);
-
-    //artefacts = getAllArtefacts();
-    // ArtefactServices().getArtefacts(widget.categoryId, widget.subcategories[subcategoryIndex].subcategoryId).then((value){
-    //   print("Value: $value, type: ${value.runtimeType}");
-    //   artefacts = value;
-    // });
   }
 
   @override
   Widget build(BuildContext context) {
-    print("----------------------------------------------------------------");
-    print(
-        "SUBCATS ARE: subcat index: ${subcategoryIndex} subcat name: ${widget.subcategories[subcategoryIndex].subcategoryName}");
-    List<Artefact> artefacts = [];
     const double listViewHeight = 400;
+
+    /// Provider is not needed
     // ArtefactService artefactService = Provider.of<ArtefactService>(context, listen: false);
     // // Future.wait();
     // artefactService.getArtefactsCollection(widget.categoryId, widget.subcategories[subcategoryIndex].subcategoryId);
@@ -66,9 +55,7 @@ class _SubcategoryListScreenState extends State<SubcategoryListScreen> {
     //     .getArtefactsCollection(widget.categoryId,
     //         widget.subcategories[subcategoryIndex].subcategoryId);
     // artefacts = artefactService.getArtefacts();
-    print(
-        "SUBCATS ARE: artefact len: ${artefacts.length}, subcat index: ${subcategoryIndex} subcat name: ${widget.subcategories[subcategoryIndex].subcategoryName}");
-    print("----------------------------------------------------------------");
+
     return Scaffold(
         backgroundColor: Styles.bgColor,
         body: Container(
@@ -113,64 +100,88 @@ class _SubcategoryListScreenState extends State<SubcategoryListScreen> {
               // Destination title
 
               // Description
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Visibility(
-                    visible: !(subcategoryIndex == 0),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        subcategoryIndex -= 1;
-                        setState(() {
-                          print("Sub index: $subcategoryIndex");
-                          artefactFuture = ArtefactService().getArtefacts(
-                              widget.categoryId,
-                              widget.subcategories[subcategoryIndex]
-                                  .subcategoryId);
-                        });
-                      },
-                      child: Icon(
-                        Icons.chevron_left_rounded,
-                        color: Styles.whiteIconColor,
-                        size: 26,
+                      visible: !(subcategoryIndex == 0),
+                      child: GestureDetector(
+                          onTap: () {
+                            subcategoryIndex -= 1;
+                            setState(() {
+                              artefactFuture = ArtefactService().getArtefacts(
+                                  widget.categoryId,
+                                  widget.subcategories[subcategoryIndex]
+                                      .subcategoryId);
+                            });
+                          },
+                          child: BackWidget(iconColor: Styles.whiteIconColor))
+
+                      // ElevatedButton(
+                      //   onPressed: () {
+                      //     subcategoryIndex -= 1;
+                      //     setState(() {
+                      //       print("Sub index: $subcategoryIndex");
+                      //       artefactFuture = ArtefactService().getArtefacts(
+                      //           widget.categoryId,
+                      //           widget.subcategories[subcategoryIndex]
+                      //               .subcategoryId);
+                      //     });
+                      //   },
+                      //   child: Icon(
+                      //     Icons.chevron_left_rounded,
+                      //     color: Styles.whiteIconColor,
+                      //     size: 26,
+                      //   ),
+                      //   style: ElevatedButton.styleFrom(
+                      //     //padding: EdgeInsets.all(8),
+                      //     backgroundColor: Styles.bgColor, // <-- Button color
+                      //     foregroundColor: Styles.bgColor, // <-- Splash color
+                      //   ),
+                      // ),
                       ),
-                      style: ElevatedButton.styleFrom(
-                        //padding: EdgeInsets.all(8),
-                        backgroundColor: Styles.bgColor, // <-- Button color
-                        foregroundColor: Styles.bgColor, // <-- Splash color
-                      ),
-                    ),
-                  ),
                   Visibility(
                     visible: subcategoryIndex < (subcategoriesLength - 1),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        subcategoryIndex += 1;
-                        setState(() {
-                          print("Sub index: $subcategoryIndex");
-                          artefactFuture = ArtefactService().getArtefacts(
-                              widget.categoryId,
-                              widget.subcategories[subcategoryIndex]
-                                  .subcategoryId);
-                        });
-                      },
-                      child: Icon(
-                        Icons.chevron_right_rounded,
-                        color: Styles.whiteIconColor,
-                        size: 26,
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        //padding: EdgeInsets.all(8),
-                        backgroundColor: Styles.bgColor, // <-- Button color
-                        foregroundColor: Styles.bgColor, // <-- Splash color
-                      ),
-                    ),
+                    child: GestureDetector(
+                        onTap: () {
+                          subcategoryIndex += 1;
+                          setState(() {
+                            artefactFuture = ArtefactService().getArtefacts(
+                                widget.categoryId,
+                                widget.subcategories[subcategoryIndex]
+                                    .subcategoryId);
+                          });
+                        },
+                        child: FwdWidget(iconColor: Styles.whiteIconColor))
+
+
+                    // ElevatedButton(
+                    //   onPressed: () {
+                    //     subcategoryIndex += 1;
+                    //     setState(() {
+                    //       print("Sub index: $subcategoryIndex");
+                    //       artefactFuture = ArtefactService().getArtefacts(
+                    //           widget.categoryId,
+                    //           widget.subcategories[subcategoryIndex]
+                    //               .subcategoryId);
+                    //     });
+                    //   },
+                    //   child: Icon(
+                    //     Icons.chevron_right_rounded,
+                    //     color: Styles.whiteIconColor,
+                    //     size: 26,
+                    //   ),
+                    //   style: ElevatedButton.styleFrom(
+                    //     //padding: EdgeInsets.all(8),
+                    //     backgroundColor: Styles.bgColor, // <-- Button color
+                    //     foregroundColor: Styles.bgColor, // <-- Splash color
+                    //   ),
+                    // ),
                   ),
                 ],
               ),
               SizedBox(
-                height: 20,
+                height: 10,
               ),
               // Line between upper menu and content
               Container(
@@ -185,9 +196,7 @@ class _SubcategoryListScreenState extends State<SubcategoryListScreen> {
                 height: 10,
               ),
 
-              // TODO: Insert logic for subcategory switching here
-
-              // Floor plan
+              /// Bottom part under white line
               Expanded(
                 child: ListView(
                     padding: EdgeInsets.only(top: 20, bottom: 10),

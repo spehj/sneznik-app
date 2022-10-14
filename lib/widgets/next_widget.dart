@@ -57,3 +57,22 @@ class BackWidget extends StatelessWidget {
   }
 }
 
+class FwdWidget extends StatelessWidget {
+  final double? size;
+  final Color? iconColor;
+  const FwdWidget({Key? key, this.size = 40, required this.iconColor}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: size!+10,
+      width: size!+10,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        color: Colors.transparent,
+      ),
+      child: Icon(Icons.chevron_right_rounded, color: iconColor, size: size,),
+    );
+  }
+}
+

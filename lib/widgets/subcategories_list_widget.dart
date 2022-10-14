@@ -45,9 +45,9 @@ class _SubcategoriesListWidgetState extends State<SubcategoriesListWidget> {
     var allSubcategories = querySnapshot.docs
         .map((doc) => doc.data() as Map<String, dynamic>)
         .toList();
-    allSubcategories.forEach((element) {
+    for (var element in allSubcategories) {
       subcategories.add(Subcategory.fromJson(element));
-    });
+    }
     return subcategories;
   }
 

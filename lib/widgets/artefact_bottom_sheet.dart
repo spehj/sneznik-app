@@ -91,7 +91,7 @@ class ArtefactBottomSheet extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          height: 16,
+                          height: 10,
                         ),
                       ],
                     ),
