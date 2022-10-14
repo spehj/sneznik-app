@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sneznik_app/models/artefact_model.dart';
 import 'package:sneznik_app/services/firebase_services.dart';
 
 import '../models/subcategory_model.dart';
@@ -24,6 +26,10 @@ class SubcategoryListScreen extends StatefulWidget {
 }
 
 class _SubcategoryListScreenState extends State<SubcategoryListScreen> {
+  // getAllArtefacts()async{
+  //   var artefacts = await ArtefactServices().getArtefacts(widget.categoryId, widget.subcategories[subcategoryIndex].subcategoryId);
+  //   return artefacts;
+  // }
 
 
   int subcategoryIndex = 0;
@@ -31,13 +37,24 @@ class _SubcategoryListScreenState extends State<SubcategoryListScreen> {
 
   @override
   void initState() {
+    print("INITEED");
     super.initState();
     subcategoryIndex = widget.tappedIndex;
     subcategoriesLength = widget.subcategories.length;
+
+    //artefacts = getAllArtefacts();
+    // ArtefactServices().getArtefacts(widget.categoryId, widget.subcategories[subcategoryIndex].subcategoryId).then((value){
+    //   print("Value: $value, type: ${value.runtimeType}");
+    //   artefacts = value;
+    // });
   }
 
   @override
   Widget build(BuildContext context) {
+
+    ArtefactService artefactService = Provider.of<ArtefactService>(context, listen: false);
+    artefactService.getArtefactsCollection(widget.categoryId, widget.subcategories[subcategoryIndex].subcategoryId);
+    List<Artefact> artefacts = artefactService.getArtefacts();
     return Scaffold(
         backgroundColor: Styles.bgColor,
         body: Container(

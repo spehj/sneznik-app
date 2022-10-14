@@ -1,10 +1,9 @@
-
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../models/artefact_model.dart';
 import '../models/subcategory_model.dart';
 
-class SubcategoryServices{
+class SubcategoryServices {
   Future<List<Subcategory>> getSubcategories(categoryId) async {
     List<Subcategory> subcategories = [];
     CollectionReference categoriesReference = FirebaseFirestore.instance
@@ -20,9 +19,64 @@ class SubcategoryServices{
     var allSubcategories = querySnapshot.docs
         .map((doc) => doc.data() as Map<String, dynamic>)
         .toList();
-    allSubcategories.forEach((element) {
+    for (var element in allSubcategories) {
       subcategories.add(Subcategory.fromJson(element));
-    });
+    }
     return subcategories;
+  }
+}
+
+// class ArtefactServices {
+//   Future<List<Artefact>> getArtefacts(categoryId, subcategoryId) async {
+//     List<Artefact> artefacts = [];
+//     CollectionReference categoriesReference = FirebaseFirestore.instance
+//         .collection("museum")
+//         .doc("YQXURRlJxRsCZpmRvhG2")
+//         .collection("categories")
+//         .doc(categoryId)
+//         .collection("subcategories")
+//         .doc(subcategoryId)
+//         .collection("artefacts");
+//     QuerySnapshot querySnapshot = await categoriesReference
+//         .orderBy("artefactPosition", descending: false)
+//         .get();
+//
+//     var allArtefacts = querySnapshot.docs
+//         .map((doc) => doc.data() as Map<String, dynamic>)
+//         .toList();
+//
+//     allArtefacts.forEach((element) {
+//       artefacts.add(Artefact.fromJson(element));
+//     });
+//     return artefacts;
+//   }
+// }
+
+class ArtefactService {
+  FirebaseFirestore? instance;
+  List<Artefact> artefacts = [];
+
+  List<Artefact> getArtefacts() {
+    return artefacts;
+  }
+
+  Future<void> getArtefactsCollection(categoryId, subcategoryId) async {
+    instance = FirebaseFirestore.instance;
+    CollectionReference collectionReference = instance!
+        .collection("museum")
+        .doc("YQXURRlJxRsCZpmRvhG2")
+        .collection("categories")
+        .doc(categoryId)
+        .collection("subcategories")
+        .doc(subcategoryId)
+        .collection("artefacts");
+    QuerySnapshot querySnapshot = await collectionReference.get();
+    var allArtefacts = querySnapshot.docs
+        .map((doc) => doc.data() as Map<String, dynamic>)
+        .toList();
+
+    for (var element in allArtefacts) {
+      artefacts.add(Artefact.fromJson(element));
+    }
   }
 }
