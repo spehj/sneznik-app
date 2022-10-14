@@ -6,6 +6,8 @@ import 'package:sneznik_app/services/firebase_services.dart';
 
 import '../models/subcategory_model.dart';
 import '../utils/app_styles.dart';
+import '../widgets/artefact_bottom_sheet.dart';
+import '../widgets/artefact_widget.dart';
 import '../widgets/artefacts_list_view.dart';
 import '../widgets/subcategory_widget.dart';
 
@@ -30,8 +32,7 @@ class _SubcategoryListScreenState extends State<SubcategoryListScreen> {
   //   var artefacts = await ArtefactServices().getArtefacts(widget.categoryId, widget.subcategories[subcategoryIndex].subcategoryId);
   //   return artefacts;
   // }
-
-
+  late Future<List<Artefact>> artefactFuture;
   int subcategoryIndex = 0;
   int subcategoriesLength = 0;
 
@@ -41,6 +42,8 @@ class _SubcategoryListScreenState extends State<SubcategoryListScreen> {
     super.initState();
     subcategoryIndex = widget.tappedIndex;
     subcategoriesLength = widget.subcategories.length;
+    artefactFuture = ArtefactService().getArtefacts(widget.categoryId,
+        widget.subcategories[subcategoryIndex].subcategoryId);
 
     //artefacts = getAllArtefacts();
     // ArtefactServices().getArtefacts(widget.categoryId, widget.subcategories[subcategoryIndex].subcategoryId).then((value){
@@ -51,10 +54,21 @@ class _SubcategoryListScreenState extends State<SubcategoryListScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-    ArtefactService artefactService = Provider.of<ArtefactService>(context, listen: false);
-    artefactService.getArtefactsCollection(widget.categoryId, widget.subcategories[subcategoryIndex].subcategoryId);
-    List<Artefact> artefacts = artefactService.getArtefacts();
+    print("----------------------------------------------------------------");
+    print(
+        "SUBCATS ARE: subcat index: ${subcategoryIndex} subcat name: ${widget.subcategories[subcategoryIndex].subcategoryName}");
+    List<Artefact> artefacts = [];
+    const double listViewHeight = 400;
+    // ArtefactService artefactService = Provider.of<ArtefactService>(context, listen: false);
+    // // Future.wait();
+    // artefactService.getArtefactsCollection(widget.categoryId, widget.subcategories[subcategoryIndex].subcategoryId);
+    // artefactService
+    //     .getArtefactsCollection(widget.categoryId,
+    //         widget.subcategories[subcategoryIndex].subcategoryId);
+    // artefacts = artefactService.getArtefacts();
+    print(
+        "SUBCATS ARE: artefact len: ${artefacts.length}, subcat index: ${subcategoryIndex} subcat name: ${widget.subcategories[subcategoryIndex].subcategoryName}");
+    print("----------------------------------------------------------------");
     return Scaffold(
         backgroundColor: Styles.bgColor,
         body: Container(
@@ -103,14 +117,17 @@ class _SubcategoryListScreenState extends State<SubcategoryListScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  
                   Visibility(
-                    visible: !(subcategoryIndex==0),
+                    visible: !(subcategoryIndex == 0),
                     child: ElevatedButton(
                       onPressed: () {
-                        subcategoryIndex -=1;
+                        subcategoryIndex -= 1;
                         setState(() {
                           print("Sub index: $subcategoryIndex");
+                          artefactFuture = ArtefactService().getArtefacts(
+                              widget.categoryId,
+                              widget.subcategories[subcategoryIndex]
+                                  .subcategoryId);
                         });
                       },
                       child: Icon(
@@ -125,14 +142,17 @@ class _SubcategoryListScreenState extends State<SubcategoryListScreen> {
                       ),
                     ),
                   ),
-
                   Visibility(
-                    visible: subcategoryIndex<(subcategoriesLength-1),
+                    visible: subcategoryIndex < (subcategoriesLength - 1),
                     child: ElevatedButton(
                       onPressed: () {
-                        subcategoryIndex +=1;
+                        subcategoryIndex += 1;
                         setState(() {
                           print("Sub index: $subcategoryIndex");
+                          artefactFuture = ArtefactService().getArtefacts(
+                              widget.categoryId,
+                              widget.subcategories[subcategoryIndex]
+                                  .subcategoryId);
                         });
                       },
                       child: Icon(
@@ -206,10 +226,108 @@ class _SubcategoryListScreenState extends State<SubcategoryListScreen> {
                         height: 20,
                       ),
                       // Add horizontal scroll
-                      ArtefactsListView(
-                          categoryId: widget.categoryId,
-                          subcategoryId: widget
-                              .subcategories[subcategoryIndex].subcategoryId),
+                      // ArtefactsListView(
+                      //     categoryId: widget.categoryId,
+                      //     subcategoryId: widget
+                      //         .subcategories[subcategoryIndex].subcategoryId),
+
+                      FutureBuilder(
+                          future: artefactFuture,
+                          builder: (BuildContext context, snapshot) {
+                            switch (snapshot.connectionState) {
+                              case ConnectionState.waiting:
+                                return Center(
+                                    child: CircularProgressIndicator());
+                              case ConnectionState.done:
+                              default:
+                                if (snapshot.hasError) {
+                                  return Center(
+                                    child: Text(
+                                      "Error: ${snapshot.error}",
+                                      style: Styles.headlineStyle4
+                                          .copyWith(color: Colors.white),
+                                    ),
+                                  );
+                                } else if (snapshot.hasData) {
+                                  List<Artefact> artefacts =
+                                      snapshot.data as List<Artefact>;
+                                  if (artefacts.length != 0) {
+                                    return SizedBox(
+                                      height: listViewHeight,
+                                      // Has to be >= ArtefactImage height
+
+                                      child: ListView.builder(
+                                          //shrinkWrap: true,
+                                          scrollDirection: Axis.horizontal,
+                                          itemCount: artefacts.length,
+                                          itemBuilder: (context, index) {
+                                            return GestureDetector(
+                                              onTap: () {
+                                                print(
+                                                    "Tapped ${artefacts[index].artefactName}");
+                                                // Commented
+                                                //Navigator.push(context, MaterialPageRoute(builder: (context) => ArtefactDetail(singleArtefact: artefacts[index],)));
+                                                showModalBottomSheet(
+                                                    isScrollControlled: true,
+                                                    backgroundColor:
+                                                        Colors.transparent,
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return ArtefactBottomSheet(
+                                                        singleArtefact:
+                                                            artefacts[index],
+                                                      );
+                                                    });
+                                              },
+                                              child: ArtefactImage(
+                                                sinlgeArtefact:
+                                                    artefacts[index],
+                                                listViewHeight: listViewHeight,
+                                              ),
+                                            );
+                                          }),
+                                    );
+                                  } else {
+                                    // If there is no artefacts to show, don't show anything
+                                    return SizedBox(
+                                      height: 30,
+                                    );
+                                  }
+                                } else {
+                                  return CircularProgressIndicator();
+                                }
+                            }
+                          }),
+
+                      /// BACKUP
+                      // child: ListView.builder(
+                      //     //shrinkWrap: true,
+                      //     scrollDirection: Axis.horizontal,
+                      //     itemCount: artefacts.length,
+                      //     itemBuilder: (context, index) {
+                      //       return GestureDetector(
+                      //         onTap: () {
+                      //           print(
+                      //               "Tapped ${artefacts[index].artefactName}");
+                      //           // Commented
+                      //           //Navigator.push(context, MaterialPageRoute(builder: (context) => ArtefactDetail(singleArtefact: artefacts[index],)));
+                      //           showModalBottomSheet(
+                      //               isScrollControlled: true,
+                      //               backgroundColor: Colors.transparent,
+                      //               context: context,
+                      //               builder: (context) {
+                      //                 return ArtefactBottomSheet(
+                      //                   singleArtefact: artefacts[index],
+                      //                 );
+                      //               });
+                      //         },
+                      //         child: ArtefactImage(
+                      //           sinlgeArtefact: artefacts[index],
+                      //           listViewHeight: listViewHeight,
+                      //         ),
+                      //       );
+                      //     }),
+
                       SizedBox(
                         height: 50,
                       ),

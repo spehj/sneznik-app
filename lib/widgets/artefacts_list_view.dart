@@ -9,6 +9,7 @@ import 'artefact_bottom_sheet.dart';
 import 'artefact_widget.dart';
 
 class ArtefactsListView extends StatefulWidget {
+  // TESTING NEW - MIGHT BE DEPRECATED SOON
   final String categoryId;
   final String subcategoryId;
 
@@ -48,9 +49,9 @@ class _ArtefactsListViewState extends State<ArtefactsListView> {
         .map((doc) => doc.data() as Map<String, dynamic>)
         .toList();
 
-    allArtefacts.forEach((element) {
+    for (var element in allArtefacts) {
       artefacts.add(Artefact.fromJson(element));
-    });
+    }
     return artefacts;
   }
 
@@ -75,6 +76,7 @@ class _ArtefactsListViewState extends State<ArtefactsListView> {
               } else if (snapshot.hasData) {
                 List<Artefact> artefacts = snapshot.data as List<Artefact>;
 
+                if (artefacts.length != 0){
                 return SizedBox(
                   height: listViewHeight, // Has to be >= ArtefactImage height
                   child: ListView.builder(
@@ -105,6 +107,9 @@ class _ArtefactsListViewState extends State<ArtefactsListView> {
                         );
                       }),
                 );
+                } else{
+                  return Center(child: Text("No artefacts to show.", style: Styles.headlineStyle2.copyWith(color: Styles.whiteTextColor),),);
+                }
               } else {
                 return CircularProgressIndicator();
               }

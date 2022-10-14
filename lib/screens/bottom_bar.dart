@@ -24,6 +24,9 @@ class _BottomBarState extends State<BottomBar> {
   static final List<Widget>_widgetOptions =  <Widget>[
 
     HomeScreen(),
+    FavoritesScreen(),
+    SettingsScreen(),
+    InfoScreen()
     //const CategoryScreen(),
     //const ArtefactDetail(),
     //const SubcategoryScreen(),
