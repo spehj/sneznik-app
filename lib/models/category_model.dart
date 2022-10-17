@@ -35,4 +35,13 @@ class Category {
         categoryPosition: json["categoryPosition"] as int,
         );
   }
+
+  Map<String, dynamic> toJson() => {
+    "categoryId": categoryId,
+    "categoryName" :categoryName,
+    "categoryDescription" : categoryDescription,
+    "categoryImageUrl" : categoryImage,
+    "categoryMapUrl" : categoryMap,
+    "categoryPosition" : categoryPosition
+  };
 }

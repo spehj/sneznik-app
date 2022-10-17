@@ -37,6 +37,24 @@ class OpenSheet extends StatelessWidget {
   }
 }
 
+class DoneEditing extends StatelessWidget {
+  const DoneEditing({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 30,
+      width: 30,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        color: Styles.ctaMoreColor,
+      ),
+      child: Icon(Icons.done_outlined, color: Styles.ctaIconColor, size: 20,),
+    );
+  }
+}
+
+
 
 class BackWidget extends StatelessWidget {
   final double? size;

@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sneznik_app/screens/add_new_screens/add_category_screen.dart';
 import 'package:sneznik_app/screens/artefacts_detail.dart';
 import 'package:sneznik_app/screens/category_screen.dart';
 import 'package:sneznik_app/screens/favorites_screen.dart';
@@ -26,7 +27,7 @@ class _BottomBarState extends State<BottomBar> {
     HomeScreen(),
     FavoritesScreen(),
     SettingsScreen(),
-    InfoScreen()
+    AddCategoryScreen(category: null,)
     //const CategoryScreen(),
     //const ArtefactDetail(),
     //const SubcategoryScreen(),

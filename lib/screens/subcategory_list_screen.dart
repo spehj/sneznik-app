@@ -35,7 +35,6 @@ class _SubcategoryListScreenState extends State<SubcategoryListScreen> {
 
   @override
   void initState() {
-    print("INITEED");
     super.initState();
     subcategoryIndex = widget.tappedIndex;
     subcategoriesLength = widget.subcategories.length;
