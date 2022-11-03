@@ -10,8 +10,10 @@ class FloorCard extends StatelessWidget {
   final String descText;
   const FloorCard({Key? key, required this.headerText, required this.cardImage, required this.descText}) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
+    // print("cardsubs: ${cardImage.substring(0,4)} result: ${cardImage.substring(0,4) == "http"} result2: ${"http"== cardImage.substring(0,4)}");
     return Container(
       margin: EdgeInsets.symmetric(vertical:10),
       //padding: EdgeInsets.only(left: 20, right: 20, top:20, bottom: 12),
@@ -22,9 +24,8 @@ class FloorCard extends StatelessWidget {
           image: DecorationImage(
               colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.8), BlendMode.dstATop),
               fit: BoxFit.cover,
-              image: AssetImage(
-                  "assets/images/${cardImage}"))
-      ),
+              image: cardImage.substring(0,4) == "http"? NetworkImage(cardImage) :AssetImage("assets/images/${cardImage}") as ImageProvider,
+      )),
       child: Stack(
         alignment: Alignment.center,
         children: [

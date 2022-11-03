@@ -25,6 +25,9 @@ class Styles{
   static Color subHeadlineColor = const Color(0xFF81694e);
   static Color ctaIconColor = const Color(0xFF35312b);
   static Color bottomBarColor = const Color(0xff111010);
+  static Color secondButtonColor = const Color(0xffADCEF6);
+  static Color secondButtonSplashColor = const Color(0xffD5ADF6);
+
 
 
 }

@@ -1,9 +1,9 @@
-import 'dart:collection';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sneznik_app/models/category_model.dart';
+import 'package:sneznik_app/screens/home_screen.dart';
 import 'package:sneznik_app/utils/app_styles.dart';
 
 import '../screens/category_screen.dart';
@@ -18,10 +18,11 @@ class CategoryListWidget extends StatefulWidget {
 
 class _CategoryListWidgetState extends State<CategoryListWidget> {
   late Future<List<Category>> categoryFuture;
-
+  bool _isExecuted = false;
   @override
   void initState() {
     super.initState();
+    print("INSIDE INIT");
 
     categoryFuture = getCategories();
   }
@@ -44,12 +45,20 @@ class _CategoryListWidgetState extends State<CategoryListWidget> {
     allCategories.forEach((element) {
       categories.add(Category.fromJson(element));
     });
-    //print("Categories: ${categories.length}");
+    Provider.of<NumberOfCategories>(context, listen: false).changeNumberOfCategories(categories.length.toDouble());
+    print("-->>>>> Categories: ${categories.length}");
     return categories;
   }
 
   @override
   Widget build(BuildContext context) {
+    // print("Built $_isExecuted");
+    // if (!_isExecuted){
+    //   ("Executed");
+    //   categoryFuture = getCategories();
+    //   _isExecuted = true;
+    // }
+    // categoryFuture = getCategories();
     return FutureBuilder(
         future: categoryFuture,
         builder: (BuildContext context, snapshot) {
