@@ -7,6 +7,7 @@ import 'package:sneznik_app/screens/home_screen.dart';
 import 'package:sneznik_app/utils/app_styles.dart';
 
 import '../screens/category_screen.dart';
+import '../services/firebase_services.dart';
 import 'floor_card_widget.dart';
 
 class CategoryListWidget extends StatelessWidget {
@@ -32,10 +33,8 @@ class CategoryListWidget extends StatelessWidget {
                 );
               } else if (snapshot.hasData) {
                 List<Category> categories = snapshot.data as List<Category>;
-                // Provider.of<NumberOfCategories>(context, listen: false).changeNumberOfCategories(categories.length.toDouble());
-                // context.read()<NumberOfCategories>().changeNumberOfCategories(newCategories: categories.length.toDouble());
-
-                // print("Categories: ${categories.length}");
+                // Save current number of categories
+                Provider.of<NumberOfCategoriesService>(context).changeNumberOfCategories(categories.length);
                 return ListView.builder(
                   padding: EdgeInsets.only(top: 20),
                   shrinkWrap: true,

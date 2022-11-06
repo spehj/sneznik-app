@@ -15,8 +15,12 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-
-  runApp(MultiProvider(providers: [Provider(create: (_) => ArtefactService()), ChangeNotifierProvider(create: (_) => NumberOfCategories())], child: const MyApp(),));
+  runApp(MultiProvider(
+    providers: [
+      Provider(create: (_) => NumberOfCategoriesService())
+    ],
+    child: const MyApp(),
+  ));
   // runApp( const MyApp());
 }
 
@@ -33,7 +37,6 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.epilogueTextTheme(
           Theme.of(context).textTheme,
         ),
-
         primaryColor: primary,
       ),
       home: const BottomBar(),

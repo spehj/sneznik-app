@@ -30,22 +30,36 @@ class AddCategoryScreen extends StatefulWidget {
 }
 
 class _AddCategoryScreenState extends State<AddCategoryScreen> {
+  // Controllers
   final ctrlCatName = TextEditingController();
   final ctrlCatDescription = TextEditingController();
+
+  // Category model data
   String _categoryImageUrl = "";
   String _categoryMapUrl = "";
   String _categoryName = "";
   String _categoryDescription = "";
   String _categoryId = "";
-  double? _categoryPosition;
-  final String museumId = "YQXURRlJxRsCZpmRvhG2";
+  int? _categoryPosition;
+
+  // Visibility variables
   bool _descButtonVisible = false;
   bool _descriptionVisible = false;
+
+  // Focus nodes
   late FocusNode _descriptionFocus;
-  final ValueNotifier<bool> updateButtonState = ValueNotifier(false);
+
+  // Image files
   XFile? _categoryPhotoFile;
   XFile? _categoryMapPhotoFile;
 
+  // Firebase IDs
+  final String museumId = "YQXURRlJxRsCZpmRvhG2";
+
+
+  /// Handle visibility of description
+  /// Only update description when green button is pressed
+  final ValueNotifier<bool> updateButtonState = ValueNotifier(false);
   changeDescButtonVisibility(String descript, {bool force = false}) {
     if (descript != "" && !_descButtonVisible && !force) {
       print("CHANGED SOME TEXT");
@@ -66,9 +80,6 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
 
   @override
   void initState() {
-    _categoryPosition =
-        Provider.of<NumberOfCategories>(context).numberOfCategories;
-    _categoryPosition ??= 0;
     if (widget.category != null) {
       /// Existing category is displayed
       _categoryId = widget.category!.categoryId;
@@ -76,16 +87,10 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
       _categoryDescription = widget.category!.categoryDescription;
       _categoryImageUrl = widget.category!.categoryImage;
       _categoryMapUrl = widget.category!.categoryMap;
-      // _categoryPosition = widget.categoryLength;
       _descButtonVisible = true;
 
-      // _categoryPosition =
-      //     Provider.of<NumberOfCategories>(context).numberOfCategories;
-      _categoryPosition = context.watch()<NumberOfCategories>().numberOfCategories;
-      print("Category length: $_categoryPosition");
     } else {
       /// New category to add
-      // Get existing category ID
       _categoryId = FirebaseFirestore.instance
           .collection("museum")
           .doc(museumId)
@@ -93,8 +98,6 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
           .doc()
           .id;
     }
-
-    print("Number of categories: $_categoryPosition");
 
     _descriptionFocus = FocusNode();
     super.initState();
@@ -314,23 +317,6 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
                                   height: 180,
                                   helperText: "Add category main image.",
                                 )
-
-                          // Container(
-                          //   padding:
-                          //       EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                          //   margin: EdgeInsets.symmetric(vertical: 20),
-                          //   height: 180,
-                          //   width: double.infinity,
-                          //   decoration: BoxDecoration(
-                          //     borderRadius: BorderRadius.circular(20),
-                          //     color: Colors.white,
-                          //   ),
-                          //   child:
-                          //   /// Here show Column with photo icon if no photo is selected.
-                          //   /// And show photo if one has been selected
-                          //
-                          //   _categoryPhotoFile != null? Image.file(File(_categoryPhotoFile!.path), fit: BoxFit.cover,): const AddCategoryPhotoWidget()
-                          // ),
                           ),
                     ]),
                     Stack(alignment: Alignment.center, children: [
@@ -393,19 +379,17 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
                     /// TODO: next (if (_categoryName != null)),
                     ListTile(
                       onTap: () async {
-                        // TODO: send data to firestore
-                        if (widget.category == null) {
-                          print(
-                              "---------> Category name if new category: ${_categoryName}");
-                          print(
-                              "---------> Category desc if new category: ${_categoryDescription}");
 
+                        if (widget.category == null) {
+                          // Get number of categories
+                          _categoryPosition = Provider.of<NumberOfCategoriesService>(context, listen: false).numberOfCategories;
+                          _categoryPosition ??=0;
                           CategoryServices().createCategory(
                               categoryName: _categoryName,
                               categoryDescription: _categoryDescription,
                               categoryImage: _categoryImageUrl,
                               categoryMap: _categoryMapUrl,
-                              categoryPosition: _categoryPosition!.toInt());
+                              categoryPosition: _categoryPosition!);
                         }
                         print("Add category");
                         Navigator.pop(context);

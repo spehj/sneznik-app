@@ -40,7 +40,9 @@ class CategoryServices {
         .doc("YQXURRlJxRsCZpmRvhG2")
         .collection("categories");
 
-    QuerySnapshot querySnapshot = await categoriesReference.orderBy("categoryPosition", descending: false).get();
+    QuerySnapshot querySnapshot = await categoriesReference
+        .orderBy("categoryPosition", descending: false)
+        .get();
 
     // Then create new category instances with factory method
     var allCategories = querySnapshot.docs
@@ -56,7 +58,7 @@ class CategoryServices {
     return categories;
   }
 
-  Future<Map<double?,List<Category>>> getCategoriesMap() async {
+  Future<Map<double?, List<Category>>> getCategoriesMap() async {
     List<Category> categoriesList = [];
     Map<double, List<Category>> categories = {};
     CollectionReference categoriesReference = FirebaseFirestore.instance
@@ -64,7 +66,9 @@ class CategoryServices {
         .doc("YQXURRlJxRsCZpmRvhG2")
         .collection("categories");
 
-    QuerySnapshot querySnapshot = await categoriesReference.orderBy("categoryPosition", descending: false).get();
+    QuerySnapshot querySnapshot = await categoriesReference
+        .orderBy("categoryPosition", descending: false)
+        .get();
 
     // Then create new category instances with factory method
     var allCategories = querySnapshot.docs
@@ -83,28 +87,40 @@ class CategoryServices {
     return categories;
   }
 
-  // Future<List<Category>> getCategories() async {
-  //   List<Category> categories = [];
-  //   CollectionReference categoriesReference = FirebaseFirestore.instance
-  //       .collection("museum")
-  //       .doc("YQXURRlJxRsCZpmRvhG2")
-  //       .collection("categories");
-  //
-  //   QuerySnapshot querySnapshot = await categoriesReference.orderBy("categoryPosition", descending: false).get();
-  //
-  //   // Then create new category instances with factory method
-  //   var allCategories = querySnapshot.docs
-  //       .map((doc) => doc.data() as Map<String, dynamic>)
-  //       .toList();
-  //
-  //   //print("All data: ${allCategories.runtimeType}");
-  //   allCategories.forEach((element) {
-  //     categories.add(Category.fromJson(element));
-  //   });
-  //   // Provider.of<NumberOfCategories>().changeNumberOfCategories(categories.length.toDouble());
-  //   print("-->>>>> Categories: ${categories.length}");
-  //   return categories;
-  // }
+
+
+// Future<List<Category>> getCategories() async {
+//   List<Category> categories = [];
+//   CollectionReference categoriesReference = FirebaseFirestore.instance
+//       .collection("museum")
+//       .doc("YQXURRlJxRsCZpmRvhG2")
+//       .collection("categories");
+//
+//   QuerySnapshot querySnapshot = await categoriesReference.orderBy("categoryPosition", descending: false).get();
+//
+//   // Then create new category instances with factory method
+//   var allCategories = querySnapshot.docs
+//       .map((doc) => doc.data() as Map<String, dynamic>)
+//       .toList();
+//
+//   //print("All data: ${allCategories.runtimeType}");
+//   allCategories.forEach((element) {
+//     categories.add(Category.fromJson(element));
+//   });
+//   // Provider.of<NumberOfCategories>().changeNumberOfCategories(categories.length.toDouble());
+//   print("-->>>>> Categories: ${categories.length}");
+//   return categories;
+// }
+}
+
+
+
+class NumberOfCategoriesService{
+  int? numberOfCategories;
+  void changeNumberOfCategories(int newCategories) {
+    numberOfCategories = newCategories;
+    print("Num of cats called: $numberOfCategories");
+  }
 }
 
 class SubcategoryServices {

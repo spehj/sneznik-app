@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sneznik_app/screens/category_screen.dart';
 import 'package:sneznik_app/services/category_service.dart';
+import 'package:sneznik_app/services/firebase_services.dart';
 import 'package:sneznik_app/utils/home_info_list.dart';
 import 'package:sneznik_app/widgets/floor_card_widget.dart';
 
@@ -32,6 +33,8 @@ class _HomeScreenState extends State<HomeScreen> {
     print("INSIDE INIT HOME");
 
     categoryFuture = getCategories();
+
+    //categoryFuture = CategoryServices().getCategoriesMap() as Future<List<Category>>;
   }
   /// ADDED
   Future<List<Category>> getCategories() async {
@@ -194,6 +197,8 @@ class NumberOfCategories extends ChangeNotifier {
     notifyListeners();
   }
 }
+
+
 
 refreshState() {
   // getCategories();
