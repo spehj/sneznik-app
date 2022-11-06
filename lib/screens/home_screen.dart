@@ -23,18 +23,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late Future<List<Category>> categoryFuture;
-  double? categoryLength = null;
-
-
 
   @override
   void initState() {
     super.initState();
-    print("INSIDE INIT HOME");
 
     categoryFuture = getCategories();
-
-    //categoryFuture = CategoryServices().getCategoriesMap() as Future<List<Category>>;
   }
   /// ADDED
   Future<List<Category>> getCategories() async {
@@ -159,9 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         context,
                         MaterialPageRoute(builder: (context) =>
                             AddCategoryScreen(
-                              category: null, /*categoryLength: Provider
-                                .of<NumberOfCategories>(context)
-                                .numberOfCategories,*/)),
+                              category: null)),
                     ).then((value){
                       setState(() {
                         categoryFuture = getCategories();
@@ -182,25 +174,4 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-}
-
-class NumberOfCategories extends ChangeNotifier {
-  /* Listen for changes in number of categories.
-  * Provider is needed because we need to pass number of categories from child categories_list_widget to a
-  * AddCategoryScreen.
-  * */
-
-  double? _numberOfCategories;
-  double? get numberOfCategories => _numberOfCategories;
-  void changeNumberOfCategories(double newCategories) {
-    _numberOfCategories = newCategories;
-    notifyListeners();
-  }
-}
-
-
-
-refreshState() {
-  // getCategories();
-  // change your state to refresh the screen
 }
