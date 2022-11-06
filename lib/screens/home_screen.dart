@@ -1,16 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:sneznik_app/screens/category_screen.dart';
-import 'package:sneznik_app/services/category_service.dart';
 import 'package:sneznik_app/services/firebase_services.dart';
-import 'package:sneznik_app/utils/home_info_list.dart';
-import 'package:sneznik_app/widgets/floor_card_widget.dart';
 
 import '../models/category_model.dart';
 import '../utils/app_styles.dart';
-import '../utils/mocked_categories.dart';
 import '../widgets/categories_list_widget.dart';
 import 'add_new_screens/add_category_screen.dart';
 
@@ -28,35 +20,9 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
 
-    categoryFuture = getCategories();
-  }
-  /// ADDED
-  Future<List<Category>> getCategories() async {
-    List<Category> categories = [];
-    CollectionReference categoriesReference = FirebaseFirestore.instance
-        .collection("museum")
-        .doc("YQXURRlJxRsCZpmRvhG2")
-        .collection("categories");
-
-    QuerySnapshot querySnapshot = await categoriesReference.orderBy("categoryPosition", descending: false).get();
-
-    // Then create new category instances with factory method
-    var allCategories = querySnapshot.docs
-        .map((doc) => doc.data() as Map<String, dynamic>)
-        .toList();
-
-    //print("All data: ${allCategories.runtimeType}");
-    allCategories.forEach((element) {
-      categories.add(Category.fromJson(element));
-    });
-    // Provider.of<NumberOfCategories>(context, listen: false).changeNumberOfCategories(categories.length.toDouble());
-    // print("-->>>>> Categories: ${categories.length}");
-    return categories;
+    categoryFuture = CategoryServices().getCategories();
   }
 
-  /// ADDED END
-
-  //List<Category> categories = Utils.getMockedCategories();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -156,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               category: null)),
                     ).then((value){
                       setState(() {
-                        categoryFuture = getCategories();
+                        categoryFuture = CategoryServices().getCategories();
                       });
 
                     });

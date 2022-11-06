@@ -20,6 +20,40 @@ class NextCard extends StatelessWidget {
   }
 }
 
+class DeleteWidget extends StatelessWidget {
+  const DeleteWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 40,
+      width: 40,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        color: Styles.deleteButtonColor,
+      ),
+      child: Icon(Icons.delete_forever, color: Styles.ctaIconColor, size: 30,),
+    );
+  }
+}
+
+class EditWidget extends StatelessWidget {
+  const EditWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 40,
+      width: 40,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        color: Styles.secondButtonColor,
+      ),
+      child: Icon(Icons.edit, color: Styles.ctaIconColor, size: 30,),
+    );
+  }
+}
+
 class OpenSheet extends StatelessWidget {
   const OpenSheet({Key? key}) : super(key: key);
 

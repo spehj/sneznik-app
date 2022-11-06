@@ -27,6 +27,7 @@ class Styles{
   static Color bottomBarColor = const Color(0xff111010);
   static Color secondButtonColor = const Color(0xffADCEF6);
   static Color secondButtonSplashColor = const Color(0xffD5ADF6);
+  static Color deleteButtonColor = const Color(0xFFF6ADCE);
 
 
 

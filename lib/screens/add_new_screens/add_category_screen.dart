@@ -6,14 +6,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:sneznik_app/services/category_service.dart';
 
 import '../../models/category_model.dart';
 import '../../services/firebase_services.dart';
 import '../../utils/app_styles.dart';
 import '../../widgets/category_widgets.dart';
 import '../../widgets/next_widget.dart';
-import '../home_screen.dart';
 
 class AddCategoryScreen extends StatefulWidget {
   // final double? categoryLength;

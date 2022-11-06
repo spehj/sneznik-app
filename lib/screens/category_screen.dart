@@ -36,49 +36,66 @@ class CategoryScreen extends StatelessWidget {
           SizedBox(
             height: 30,
           ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: BackWidget(
-                    size: 50,
-                    iconColor: Styles.whiteIconColor,
-                  )),
-              Text(
-                categoryName,
-                style: Styles.headlineStyle2,
-                textAlign: TextAlign.center,
+          Stack(children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: BackWidget(
+                      size: 50,
+                      iconColor: Styles.whiteIconColor,
+                    )),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width - 100,
+                  child: Text(
+                    categoryName,
+                    style: Styles.headlineStyle2,
+                    textAlign: TextAlign.left,
+                    maxLines: 2,
+                  ),
+                ),
+              ],
+            ),
+            Positioned(
+              top: 6,
+              right: 0,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  // Go to category editing screen
+                  EditWidget(),
+                  SizedBox(
+                    width: 12,
+                  ),
+                  // Delete category
+                  DeleteWidget(),
+                ],
               ),
-            ],
-          ),
+            )
+          ]),
           SizedBox(
             height: 16,
           ),
-          // Destination title
-
-          // Description
-
-          Padding(
-            padding: const EdgeInsets.only(left: 12, bottom: 10),
-            child: SizedBox(
-              width: double.infinity,
-              child: Text(
-                categoryDescription,
-                style:
-                    Styles.headlineStyle3.copyWith(color: Styles.greyTextColor),
-                textAlign: TextAlign.start,
-              ),
-            ),
-          ),
-
           // Floor plan
           Expanded(
             child: ListView(
                 padding: EdgeInsets.only(top: 10, bottom: 10),
                 children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 12, bottom: 10),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: Text(
+                        categoryDescription,
+                        style: Styles.headlineStyle3
+                            .copyWith(color: Styles.greyTextColor),
+                        textAlign: TextAlign.start,
+                      ),
+                    ),
+                  ),
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                     margin: EdgeInsets.symmetric(vertical: 20),
@@ -87,8 +104,12 @@ class CategoryScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                       color: Colors.white,
                       image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage("assets/images/$categoryMap")),
+                        fit: BoxFit.cover,
+                        image: categoryMap.length >0 ? categoryMap.substring(0, 4) == "http"
+                            ? NetworkImage(categoryMap)
+                            : AssetImage("assets/images/${categoryMap}")
+                                as ImageProvider : AssetImage("assets/images/castle-floor.jpg"),
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -106,7 +127,6 @@ class CategoryScreen extends StatelessWidget {
                     height: 10,
                   ),
                   SubcategoriesListWidget(categoryId: categoryId),
-
                 ]),
           )
         ]),

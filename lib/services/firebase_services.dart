@@ -5,6 +5,7 @@ import 'package:sneznik_app/models/category_model.dart';
 import '../models/artefact_model.dart';
 import '../models/subcategory_model.dart';
 import '../screens/home_screen.dart';
+import '../utils/constants.dart';
 
 class CategoryServices {
   Future createCategory(
@@ -13,11 +14,11 @@ class CategoryServices {
       required String categoryDescription,
       required String categoryMap,
       required int categoryPosition}) async {
-    // TODO: Change museum doc to variable and add organization as top level collection
+    // TODO: Add organization as top level collection
 
     final categoryDocument = FirebaseFirestore.instance
         .collection("museum")
-        .doc("YQXURRlJxRsCZpmRvhG2")
+        .doc(Constants.museumDocId)
         .collection("categories")
         .doc();
     final category = Category(
@@ -37,7 +38,7 @@ class CategoryServices {
     List<Category> categories = [];
     CollectionReference categoriesReference = FirebaseFirestore.instance
         .collection("museum")
-        .doc("YQXURRlJxRsCZpmRvhG2")
+        .doc(Constants.museumDocId)
         .collection("categories");
 
     QuerySnapshot querySnapshot = await categoriesReference
@@ -50,76 +51,21 @@ class CategoryServices {
         .toList();
 
     //print("All data: ${allCategories.runtimeType}");
-    allCategories.forEach((element) {
+    for (var element in allCategories) {
       categories.add(Category.fromJson(element));
-    });
-    // Provider.of<NumberOfCategories>().changeNumberOfCategories(categories.length.toDouble());
-    print("-->>>>> Categories: ${categories.length}");
+    }
     return categories;
   }
-
-  Future<Map<double?, List<Category>>> getCategoriesMap() async {
-    List<Category> categoriesList = [];
-    Map<double, List<Category>> categories = {};
-    CollectionReference categoriesReference = FirebaseFirestore.instance
-        .collection("museum")
-        .doc("YQXURRlJxRsCZpmRvhG2")
-        .collection("categories");
-
-    QuerySnapshot querySnapshot = await categoriesReference
-        .orderBy("categoryPosition", descending: false)
-        .get();
-
-    // Then create new category instances with factory method
-    var allCategories = querySnapshot.docs
-        .map((doc) => doc.data() as Map<String, dynamic>)
-        .toList();
-
-    //print("All data: ${allCategories.runtimeType}");
-    allCategories.forEach((element) {
-      categoriesList.add(Category.fromJson(element));
-    });
-    // Provider.of<NumberOfCategories>().changeNumberOfCategories(categories.length.toDouble());
-    print("-->>>>> Categories: ${categoriesList.length}");
-
-    categories[querySnapshot.size.toDouble()] = categoriesList;
-
-    return categories;
-  }
-
-
-
-// Future<List<Category>> getCategories() async {
-//   List<Category> categories = [];
-//   CollectionReference categoriesReference = FirebaseFirestore.instance
-//       .collection("museum")
-//       .doc("YQXURRlJxRsCZpmRvhG2")
-//       .collection("categories");
-//
-//   QuerySnapshot querySnapshot = await categoriesReference.orderBy("categoryPosition", descending: false).get();
-//
-//   // Then create new category instances with factory method
-//   var allCategories = querySnapshot.docs
-//       .map((doc) => doc.data() as Map<String, dynamic>)
-//       .toList();
-//
-//   //print("All data: ${allCategories.runtimeType}");
-//   allCategories.forEach((element) {
-//     categories.add(Category.fromJson(element));
-//   });
-//   // Provider.of<NumberOfCategories>().changeNumberOfCategories(categories.length.toDouble());
-//   print("-->>>>> Categories: ${categories.length}");
-//   return categories;
-// }
 }
 
-
-
-class NumberOfCategoriesService{
+class NumberOfCategoriesService {
+  /*
+  * Provider service to get latest number of categories. Used to increment position of newly created category.
+  * */
   int? numberOfCategories;
+
   void changeNumberOfCategories(int newCategories) {
     numberOfCategories = newCategories;
-    print("Num of cats called: $numberOfCategories");
   }
 }
 
@@ -130,7 +76,7 @@ class SubcategoryServices {
     List<Subcategory> subcategories = [];
     CollectionReference categoriesReference = FirebaseFirestore.instance
         .collection("museum")
-        .doc("YQXURRlJxRsCZpmRvhG2")
+        .doc(Constants.museumDocId)
         .collection("categories")
         .doc(categoryId)
         .collection("subcategories");
@@ -187,7 +133,7 @@ class ArtefactService {
     List<Artefact> artefacts = [];
     CollectionReference categoriesReference = FirebaseFirestore.instance
         .collection("museum")
-        .doc("YQXURRlJxRsCZpmRvhG2")
+        .doc(Constants.museumDocId)
         .collection("categories")
         .doc(categoryId)
         .collection("subcategories")
@@ -212,7 +158,7 @@ class ArtefactService {
     instance = FirebaseFirestore.instance;
     CollectionReference collectionReference = instance!
         .collection("museum")
-        .doc("YQXURRlJxRsCZpmRvhG2")
+        .doc(Constants.museumDocId)
         .collection("categories")
         .doc(categoryId)
         .collection("subcategories")
