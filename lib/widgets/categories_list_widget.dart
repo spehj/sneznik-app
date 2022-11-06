@@ -9,56 +9,12 @@ import 'package:sneznik_app/utils/app_styles.dart';
 import '../screens/category_screen.dart';
 import 'floor_card_widget.dart';
 
-class CategoryListWidget extends StatefulWidget {
-  const CategoryListWidget({Key? key}) : super(key: key);
-
-  @override
-  State<CategoryListWidget> createState() => _CategoryListWidgetState();
-}
-
-class _CategoryListWidgetState extends State<CategoryListWidget> {
-  late Future<List<Category>> categoryFuture;
-  bool _isExecuted = false;
-  @override
-  void initState() {
-    super.initState();
-    print("INSIDE INIT");
-
-    categoryFuture = getCategories();
-  }
-
-  Future<List<Category>> getCategories() async {
-    List<Category> categories = [];
-    CollectionReference categoriesReference = FirebaseFirestore.instance
-        .collection("museum")
-        .doc("YQXURRlJxRsCZpmRvhG2")
-        .collection("categories");
-
-    QuerySnapshot querySnapshot = await categoriesReference.orderBy("categoryPosition", descending: false).get();
-
-    // Then create new category instances with factory method
-    var allCategories = querySnapshot.docs
-        .map((doc) => doc.data() as Map<String, dynamic>)
-        .toList();
-
-    //print("All data: ${allCategories.runtimeType}");
-    allCategories.forEach((element) {
-      categories.add(Category.fromJson(element));
-    });
-    Provider.of<NumberOfCategories>(context, listen: false).changeNumberOfCategories(categories.length.toDouble());
-    print("-->>>>> Categories: ${categories.length}");
-    return categories;
-  }
+class CategoryListWidget extends StatelessWidget {
+  Future<List<Category>> categoryFuture;
+  CategoryListWidget({Key? key, required this.categoryFuture}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // print("Built $_isExecuted");
-    // if (!_isExecuted){
-    //   ("Executed");
-    //   categoryFuture = getCategories();
-    //   _isExecuted = true;
-    // }
-    // categoryFuture = getCategories();
     return FutureBuilder(
         future: categoryFuture,
         builder: (BuildContext context, snapshot) {
@@ -76,6 +32,9 @@ class _CategoryListWidgetState extends State<CategoryListWidget> {
                 );
               } else if (snapshot.hasData) {
                 List<Category> categories = snapshot.data as List<Category>;
+                // Provider.of<NumberOfCategories>(context, listen: false).changeNumberOfCategories(categories.length.toDouble());
+                // context.read()<NumberOfCategories>().changeNumberOfCategories(newCategories: categories.length.toDouble());
+
                 // print("Categories: ${categories.length}");
                 return ListView.builder(
                   padding: EdgeInsets.only(top: 20),
@@ -123,3 +82,36 @@ class _CategoryListWidgetState extends State<CategoryListWidget> {
         });
   }
 }
+
+// late Future<List<Category>> categoryFuture;
+// bool _isExecuted = false;
+// @override
+// void initState() {
+//   super.initState();
+//   print("INSIDE INIT");
+//
+//   categoryFuture = getCategories();
+// }
+//
+// Future<List<Category>> getCategories() async {
+//   List<Category> categories = [];
+//   CollectionReference categoriesReference = FirebaseFirestore.instance
+//       .collection("museum")
+//       .doc("YQXURRlJxRsCZpmRvhG2")
+//       .collection("categories");
+//
+//   QuerySnapshot querySnapshot = await categoriesReference.orderBy("categoryPosition", descending: false).get();
+//
+//   // Then create new category instances with factory method
+//   var allCategories = querySnapshot.docs
+//       .map((doc) => doc.data() as Map<String, dynamic>)
+//       .toList();
+//
+//   //print("All data: ${allCategories.runtimeType}");
+//   allCategories.forEach((element) {
+//     categories.add(Category.fromJson(element));
+//   });
+//   Provider.of<NumberOfCategories>(context, listen: false).changeNumberOfCategories(categories.length.toDouble());
+//   print("-->>>>> Categories: ${categories.length}");
+//   return categories;
+// }

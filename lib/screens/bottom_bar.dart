@@ -27,7 +27,7 @@ class _BottomBarState extends State<BottomBar> {
     HomeScreen(),
     FavoritesScreen(),
     SettingsScreen(),
-    AddCategoryScreen(category: null, categoryLength: null ,)
+    AddCategoryScreen(category: null)
     //const CategoryScreen(),
     //const ArtefactDetail(),
     //const SubcategoryScreen(),

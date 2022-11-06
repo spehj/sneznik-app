@@ -21,6 +21,44 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late Future<List<Category>> categoryFuture;
+  double? categoryLength = null;
+
+
+
+  @override
+  void initState() {
+    super.initState();
+    print("INSIDE INIT HOME");
+
+    categoryFuture = getCategories();
+  }
+  /// ADDED
+  Future<List<Category>> getCategories() async {
+    List<Category> categories = [];
+    CollectionReference categoriesReference = FirebaseFirestore.instance
+        .collection("museum")
+        .doc("YQXURRlJxRsCZpmRvhG2")
+        .collection("categories");
+
+    QuerySnapshot querySnapshot = await categoriesReference.orderBy("categoryPosition", descending: false).get();
+
+    // Then create new category instances with factory method
+    var allCategories = querySnapshot.docs
+        .map((doc) => doc.data() as Map<String, dynamic>)
+        .toList();
+
+    //print("All data: ${allCategories.runtimeType}");
+    allCategories.forEach((element) {
+      categories.add(Category.fromJson(element));
+    });
+    // Provider.of<NumberOfCategories>(context, listen: false).changeNumberOfCategories(categories.length.toDouble());
+    // print("-->>>>> Categories: ${categories.length}");
+    return categories;
+  }
+
+  /// ADDED END
+
   //List<Category> categories = Utils.getMockedCategories();
   @override
   Widget build(BuildContext context) {
@@ -95,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           style: Styles.headlineStyle2,
                           textAlign: TextAlign.left,
                         )),
-                    CategoryListWidget(),
+                    CategoryListWidget(categoryFuture: categoryFuture,),
                     SizedBox(
                       height: 50,
                     ),
@@ -118,11 +156,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         context,
                         MaterialPageRoute(builder: (context) =>
                             AddCategoryScreen(
-                              category: null, categoryLength: Provider
+                              category: null, /*categoryLength: Provider
                                 .of<NumberOfCategories>(context)
-                                .numberOfCategories,)),
+                                .numberOfCategories,*/)),
                     ).then((value){
-                      refreshState();
+                      setState(() {
+                        categoryFuture = getCategories();
+                      });
 
                     });
                   },
@@ -142,11 +182,15 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class NumberOfCategories extends ChangeNotifier {
-  /* Listen for changes in number of categories. */
-  double? numberOfCategories = null;
+  /* Listen for changes in number of categories.
+  * Provider is needed because we need to pass number of categories from child categories_list_widget to a
+  * AddCategoryScreen.
+  * */
 
+  double? _numberOfCategories;
+  double? get numberOfCategories => _numberOfCategories;
   void changeNumberOfCategories(double newCategories) {
-    numberOfCategories = newCategories;
+    _numberOfCategories = newCategories;
     notifyListeners();
   }
 }

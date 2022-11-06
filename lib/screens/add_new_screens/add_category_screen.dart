@@ -5,6 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:sneznik_app/services/category_service.dart';
 
 import '../../models/category_model.dart';
@@ -12,14 +13,17 @@ import '../../services/firebase_services.dart';
 import '../../utils/app_styles.dart';
 import '../../widgets/category_widgets.dart';
 import '../../widgets/next_widget.dart';
+import '../home_screen.dart';
 
 class AddCategoryScreen extends StatefulWidget {
-  final double? categoryLength;
+  // final double? categoryLength;
   final Category? category;
 
-  const AddCategoryScreen(
-      {Key? key, required this.category, required this.categoryLength})
-      : super(key: key);
+  const AddCategoryScreen({
+    Key? key,
+    required this.category,
+    /*required this.categoryLength*/
+  }) : super(key: key);
 
   @override
   State<AddCategoryScreen> createState() => _AddCategoryScreenState();
@@ -33,7 +37,7 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
   String _categoryName = "";
   String _categoryDescription = "";
   String _categoryId = "";
-  double? _categoryPosition = null;
+  double? _categoryPosition;
   final String museumId = "YQXURRlJxRsCZpmRvhG2";
   bool _descButtonVisible = false;
   bool _descriptionVisible = false;
@@ -62,21 +66,26 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
 
   @override
   void initState() {
+    _categoryPosition =
+        Provider.of<NumberOfCategories>(context).numberOfCategories;
+    _categoryPosition ??= 0;
     if (widget.category != null) {
+      /// Existing category is displayed
       _categoryId = widget.category!.categoryId;
       _categoryName = widget.category!.categoryName;
       _categoryDescription = widget.category!.categoryDescription;
       _categoryImageUrl = widget.category!.categoryImage;
       _categoryMapUrl = widget.category!.categoryMap;
-      _categoryPosition = widget.categoryLength;
+      // _categoryPosition = widget.categoryLength;
       _descButtonVisible = true;
-    } else {
-      if (widget.categoryLength != null) {
-        _categoryPosition = widget.categoryLength;
-      } else {
-        _categoryPosition = 0;
-      }
 
+      // _categoryPosition =
+      //     Provider.of<NumberOfCategories>(context).numberOfCategories;
+      _categoryPosition = context.watch()<NumberOfCategories>().numberOfCategories;
+      print("Category length: $_categoryPosition");
+    } else {
+      /// New category to add
+      // Get existing category ID
       _categoryId = FirebaseFirestore.instance
           .collection("museum")
           .doc(museumId)
