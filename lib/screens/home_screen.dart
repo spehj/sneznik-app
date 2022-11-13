@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sneznik_app/services/category_service.dart';
 import 'package:sneznik_app/services/firebase_services.dart';
 
 import '../models/category_model.dart';
@@ -25,6 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    CategoryService categoryService = Provider.of<CategoryService>(context, listen: false);
+    categoryService.getAllCategories();
     return Scaffold(
       backgroundColor: Styles.bgColor,
       body: Container(
@@ -122,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               category: null)),
                     ).then((value){
                       setState(() {
-                        categoryFuture = CategoryServices().getCategories();
+                        categoryService.getAllCategories();
                       });
 
                     });
