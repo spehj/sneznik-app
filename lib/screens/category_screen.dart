@@ -1,27 +1,30 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sneznik_app/widgets/next_widget.dart';
 import 'package:sneznik_app/widgets/subcategories_list_widget.dart';
-import 'package:sneznik_app/widgets/subcategory_widget.dart';
 
-import '../models/subcategory_model.dart';
+import '../models/category_model.dart';
+import '../services/firebase_services.dart';
 import '../utils/app_styles.dart';
 
 class CategoryScreen extends StatelessWidget {
-  final String categoryId;
-  final String categoryName;
-  final String categoryImage;
-  final String categoryDescription;
-  final String categoryMap;
+  final Category category;
 
   const CategoryScreen(
       {Key? key,
-      required this.categoryId,
-      required this.categoryName,
-      required this.categoryImage,
-      required this.categoryDescription,
-      required this.categoryMap})
+        required this.category
+      })
       : super(key: key);
+
+
+  // Future<void> deleteCategory(String categoryId) async{
+  //   await FirebaseFirestore.instance.runTransaction((Transaction myTransaction) async {
+  //     await myTransaction.delete(snapshot.data.documents[index].reference);
+  //   });
+  //
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +54,7 @@ class CategoryScreen extends StatelessWidget {
                 SizedBox(
                   width: MediaQuery.of(context).size.width - 100,
                   child: Text(
-                    categoryName,
+                    category.categoryName,
                     style: Styles.headlineStyle2,
                     textAlign: TextAlign.left,
                     maxLines: 2,
@@ -71,7 +74,10 @@ class CategoryScreen extends StatelessWidget {
                     width: 12,
                   ),
                   // Delete category
-                  DeleteWidget(),
+                  GestureDetector(child: DeleteWidget(), onTap: ()async{
+                    print("tap deltet");
+                    await CategoryServices().deleteCategory(category.categoryId);
+                  },),
                 ],
               ),
             )
@@ -89,7 +95,7 @@ class CategoryScreen extends StatelessWidget {
                     child: SizedBox(
                       width: double.infinity,
                       child: Text(
-                        categoryDescription,
+                        category.categoryDescription,
                         style: Styles.headlineStyle3
                             .copyWith(color: Styles.greyTextColor),
                         textAlign: TextAlign.start,
@@ -105,9 +111,9 @@ class CategoryScreen extends StatelessWidget {
                       color: Colors.white,
                       image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: categoryMap.isNotEmpty ? categoryMap.substring(0, 4) == "http"
-                            ? NetworkImage(categoryMap)
-                            : AssetImage("assets/images/$categoryMap")
+                        image: category.categoryMap.isNotEmpty ? category.categoryMap.substring(0, 4) == "http"
+                            ? NetworkImage(category.categoryMap)
+                            : AssetImage("assets/images/${category.categoryMap}")
                                 as ImageProvider : AssetImage("assets/images/castle-floor.jpg"),
                       ),
                     ),
@@ -126,7 +132,7 @@ class CategoryScreen extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                  SubcategoriesListWidget(categoryId: categoryId),
+                  SubcategoriesListWidget(categoryId: category.categoryId),
                 ]),
           )
         ]),
