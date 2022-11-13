@@ -105,9 +105,9 @@ class CategoryScreen extends StatelessWidget {
                       color: Colors.white,
                       image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: categoryMap.length >0 ? categoryMap.substring(0, 4) == "http"
+                        image: categoryMap.isNotEmpty ? categoryMap.substring(0, 4) == "http"
                             ? NetworkImage(categoryMap)
-                            : AssetImage("assets/images/${categoryMap}")
+                            : AssetImage("assets/images/$categoryMap")
                                 as ImageProvider : AssetImage("assets/images/castle-floor.jpg"),
                       ),
                     ),

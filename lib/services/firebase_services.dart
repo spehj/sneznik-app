@@ -56,6 +56,11 @@ class CategoryServices {
     }
     return categories;
   }
+
+  /// Delete category
+  // void deleteCategory(String categoryId){
+  //   Future<QuerySnapshot> category =
+  // }
 }
 
 class NumberOfCategoriesService {
