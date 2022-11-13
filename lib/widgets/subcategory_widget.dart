@@ -17,13 +17,13 @@ class SubcatCard extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       padding: EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 12),
-      height: 140,
+      height: 160,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           color: Colors.black,
           image: DecorationImage(
               colorFilter: ColorFilter.mode(
-                  Colors.black.withOpacity(0.4), BlendMode.dstATop),
+                  Colors.black.withOpacity(0.8), BlendMode.dstATop),
               fit: BoxFit.cover,
               image: AssetImage("assets/images/${subcategoryImage}"))),
       child: Stack(
@@ -41,20 +41,6 @@ class SubcatCard extends StatelessWidget {
           Positioned(top: 0, right: 0, child: NextCard()),
         ],
       ),
-      // child: Column(
-      //   children: [
-      //     SizedBox(
-      //         width: double.infinity,
-      //         child: Text(
-      //           subcategoryName!,
-      //           style: Styles.headlineStyle2,
-      //           textAlign: TextAlign.left,
-      //         )),
-      //     SizedBox(
-      //       height: 10,
-      //     ),
-      //   ],
-      // ),
     );
   }
 }

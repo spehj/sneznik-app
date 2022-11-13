@@ -1,7 +1,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sneznik_app/screens/artefacts/artefacts_detail.dart';
+import 'package:sneznik_app/screens/add_new_screens/add_category_screen.dart';
+import 'package:sneznik_app/screens/artefacts_detail.dart';
 import 'package:sneznik_app/screens/category_screen.dart';
 import 'package:sneznik_app/screens/favorites_screen.dart';
 import 'package:sneznik_app/screens/subcategory_screen.dart';
@@ -24,9 +25,12 @@ class _BottomBarState extends State<BottomBar> {
   static final List<Widget>_widgetOptions =  <Widget>[
 
     HomeScreen(),
+    FavoritesScreen(),
+    SettingsScreen(),
+    AddCategoryScreen(category: null)
     //const CategoryScreen(),
-    const ArtefactDetail(),
-    const SubcategoryScreen(),
+    //const ArtefactDetail(),
+    //const SubcategoryScreen(),
     // const Text("Tickets"),
     // const Text("Profile"),
 
@@ -49,11 +53,11 @@ class _BottomBarState extends State<BottomBar> {
       body: Center(child: _widgetOptions[_selectedIndex]),
       bottomNavigationBar: ClipRRect(
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(25.0),
-            topRight: Radius.circular(25.0),
+            topLeft: Radius.circular(30.0),
+            topRight: Radius.circular(30.0),
           ),
           child: BottomNavigationBar(
-              backgroundColor: const Color(0xFF000000),
+              backgroundColor: Styles.bottomBarColor,
               type: BottomNavigationBarType.fixed,
               currentIndex: _selectedIndex,
               onTap: _onItemTapped,
@@ -61,7 +65,7 @@ class _BottomBarState extends State<BottomBar> {
               showSelectedLabels: false,
               showUnselectedLabels: false,
               selectedItemColor: Styles.whiteIconColor,
-              unselectedItemColor: const Color(0xFF526480),
+              unselectedItemColor: const Color(0xFF807F7F),
               items: const [
                 BottomNavigationBarItem(icon: Icon(Icons.home_outlined),
                     activeIcon: Icon(Icons.home),

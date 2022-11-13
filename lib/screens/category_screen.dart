@@ -1,20 +1,31 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sneznik_app/widgets/next_widget.dart';
+import 'package:sneznik_app/widgets/subcategories_list_widget.dart';
 import 'package:sneznik_app/widgets/subcategory_widget.dart';
 
 import '../models/subcategory_model.dart';
 import '../utils/app_styles.dart';
 
 class CategoryScreen extends StatelessWidget {
+  final String categoryId;
   final String categoryName;
   final String categoryImage;
   final String categoryDescription;
   final String categoryMap;
-  const CategoryScreen({Key? key, required this.categoryName, required this.categoryImage, required this.categoryDescription, required this.categoryMap}) : super(key: key);
+
+  const CategoryScreen(
+      {Key? key,
+      required this.categoryId,
+      required this.categoryName,
+      required this.categoryImage,
+      required this.categoryDescription,
+      required this.categoryMap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final subcategories = Subcategory.fetchSubcategories(categoryName);
+    //final subcategories = []; //Subcategory.fetchSubcategories(categoryName);
     //print("Categories: ${subcategories}");
     return Scaffold(
       backgroundColor: Styles.bgColor,
@@ -25,61 +36,66 @@ class CategoryScreen extends StatelessWidget {
           SizedBox(
             height: 30,
           ),
-          Row(
-            children: [
-              SizedBox(
-                height: 30,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: Icon(
-                    Icons.arrow_back,
-                    color: Styles.whiteIconColor,
-                    size: 20,
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    shape: CircleBorder(
-                        side:
-                            BorderSide(width: 2, color: Styles.whiteIconColor)),
-                    //padding: EdgeInsets.all(8),
-                    backgroundColor: Styles.bgColor, // <-- Button color
-                    foregroundColor: Styles.oceanBlueColor, // <-- Splash color
+          Stack(children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: BackWidget(
+                      size: 50,
+                      iconColor: Styles.whiteIconColor,
+                    )),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width - 100,
+                  child: Text(
+                    categoryName,
+                    style: Styles.headlineStyle2,
+                    textAlign: TextAlign.left,
+                    maxLines: 2,
                   ),
                 ),
-              ),
-
-              // TODO: change with a variable
-              Text(
-                categoryName,
-                style: Styles.headlineStyle2,
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          // Destination title
-
-          // Description
-
-          Padding(
-            padding: const EdgeInsets.only(left: 12, bottom: 12),
-            // TODO: fill with data from json
-            child: SizedBox(
-              width: double.infinity,
-              child: Text(
-                categoryDescription,
-                style:
-                    Styles.headlineStyle3.copyWith(color: Styles.greyTextColor),
-                textAlign: TextAlign.start,
-              ),
+              ],
             ),
+            Positioned(
+              top: 6,
+              right: 0,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  // Go to category editing screen
+                  EditWidget(),
+                  SizedBox(
+                    width: 12,
+                  ),
+                  // Delete category
+                  DeleteWidget(),
+                ],
+              ),
+            )
+          ]),
+          SizedBox(
+            height: 16,
           ),
-
           // Floor plan
           Expanded(
             child: ListView(
-                padding: EdgeInsets.only(top: 20, bottom: 10),
+                padding: EdgeInsets.only(top: 10, bottom: 10),
                 children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 12, bottom: 10),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: Text(
+                        categoryDescription,
+                        style: Styles.headlineStyle3
+                            .copyWith(color: Styles.greyTextColor),
+                        textAlign: TextAlign.start,
+                      ),
+                    ),
+                  ),
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                     margin: EdgeInsets.symmetric(vertical: 20),
@@ -88,8 +104,12 @@ class CategoryScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                       color: Colors.white,
                       image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage("assets/images/$categoryMap")),
+                        fit: BoxFit.cover,
+                        image: categoryMap.isNotEmpty ? categoryMap.substring(0, 4) == "http"
+                            ? NetworkImage(categoryMap)
+                            : AssetImage("assets/images/$categoryMap")
+                                as ImageProvider : AssetImage("assets/images/castle-floor.jpg"),
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -106,26 +126,7 @@ class CategoryScreen extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                  Expanded(child: ListView.builder(
-                    padding: EdgeInsets.only(top: 20),
-                    shrinkWrap: true,
-                    physics: const ScrollPhysics(),
-                    itemCount: subcategories?.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return GestureDetector(
-                        onTap: (){
-                          print("Tapped ${subcategories?[index].categoryName}");
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(builder: (context)=>CategoryScreen(categoryName: subcategories[index]?.categoryName, categoryDescription: categories[index].categoryDescription, categoryImage: categories[index].categoryImage, categoryMap: categories[index].categoryMap,
-                          //
-                          //     )));
-                        },
-                        child:
-                          SubcatCard(subcategoryName: subcategories?[index].subcategoryName, subcategoryImage: subcategories?[index].subcategoryImage,)
-                      );
-                    },
-                  ),)
+                  SubcategoriesListWidget(categoryId: categoryId),
                 ]),
           )
         ]),
