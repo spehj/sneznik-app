@@ -1,16 +1,16 @@
-# sneznik_app
+# Sneznik Castle Digital Guide App
 
-A new Flutter project.
+This is a Flutter app for tours around Sneznik Castle (Slovenia, Europe). Right now visitors can only be guided through castle with a guide.
 
-## Getting Started
+Purpose of this app is that tourists would be able to take a tour around the castle at their own pace.
 
-This project is a starting point for a Flutter application.
+App is designed like a CMS, so people from the museum could edit/add/delete content as they wish. This way no manual update of the app is needed.
 
-A few resources to get you started if this is your first Flutter project:
+App uses Firebase NoSql storage for content and Firebase Storage for images.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Demo of the app
+A quick tour through the app to get the idea.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+App is still work in progress.
+
