@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:sneznik_app/models/category_model.dart';
 
@@ -8,6 +9,8 @@ import '../screens/home_screen.dart';
 import '../utils/constants.dart';
 
 class CategoryServices {
+
+
   Future createCategory(
       {required String categoryName,
       required String categoryImage,
@@ -57,10 +60,39 @@ class CategoryServices {
     return categories;
   }
 
+
+
+  Future<void> deleteCategoryImage(String url) async{
+    try {
+      await FirebaseStorage.instance.refFromURL(url).delete();
+    } catch (e) {
+      print("Error deleting db from cloud: $e");
+    }
+  }
+
   /// Delete category
-  // void deleteCategory(String categoryId){
-  //   Future<QuerySnapshot> category =
-  // }
+  Future<void> deleteCategory(String categoryId) async{
+    print("Delete");
+    DocumentReference documentReference = FirebaseFirestore.instance.collection("museum")
+        .doc(Constants.museumDocId)
+        .collection("categories").doc(categoryId);
+    DocumentSnapshot documentSnapshot = await documentReference.get();
+    var documentData = documentSnapshot.data();
+    print("DOC DATA: ${documentData}");
+    /// TODO: add delete
+    // if(documentData["categoryImageUrl"] != null){
+    //   String mainImage = documentData?["categoryImageUrl"];
+    // }
+    //
+    //
+    // // await deleteCategoryImage()
+    // FirebaseFirestore.instance.runTransaction((transaction) async =>
+    // await transaction.delete(documentReference));
+    // print("Category Deleted");
+  }
+  
+  
+  
 }
 
 class NumberOfCategoriesService {

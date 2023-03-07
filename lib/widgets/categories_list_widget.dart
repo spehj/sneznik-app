@@ -47,21 +47,27 @@ class CategoryListWidget extends StatelessWidget {
                           print("Tapped ${index}");
                           Navigator.push(
                               context,
+                              // MaterialPageRoute(
+                              //     builder: (context) => CategoryScreen(
+                              //       categoryId: categories[index].categoryId,
+                              //           categoryName:
+                              //               categories[index].categoryName,
+                              //           //categories[index].categoryName,
+                              //           categoryDescription: categories[index]
+                              //               .categoryDescription,
+                              //           //categories[index].categoryDescription,
+                              //           categoryImage:
+                              //               categories[index].categoryImage,
+                              //           //categories[index].categoryImage,
+                              //           categoryMap: categories[index]
+                              //               .categoryMap, //categories[index].categoryMap,
+                              //         ))
                               MaterialPageRoute(
                                   builder: (context) => CategoryScreen(
-                                    categoryId: categories[index].categoryId,
-                                        categoryName:
-                                            categories[index].categoryName,
-                                        //categories[index].categoryName,
-                                        categoryDescription: categories[index]
-                                            .categoryDescription,
-                                        //categories[index].categoryDescription,
-                                        categoryImage:
-                                            categories[index].categoryImage,
-                                        //categories[index].categoryImage,
-                                        categoryMap: categories[index]
-                                            .categoryMap, //categories[index].categoryMap,
-                                      )));
+                                    category: categories[index], //categories[index].categoryMap,
+                                  ))
+
+                          );
                         },
                         child: FloorCard(
                           headerText: categories[index].categoryName,

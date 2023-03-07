@@ -86,18 +86,6 @@ class _SubcategoriesListWidgetState extends State<SubcategoriesListWidget> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => SubcategoryListScreen(categoryId: widget.categoryId, subcategories: subcategories, tappedIndex: index,)
-                                      // SubcategoryScreen(
-                                      //   subcategoryName: subcategories[index]
-                                      //       .subcategoryName,
-                                      //   subcategoryDescription:
-                                      //       subcategories[index]
-                                      //           .subcategoryDescription,
-                                      //   subcategoryImage: subcategories[index]
-                                      //       .subcategoryImageUrl,
-                                      //   subcategoryId:
-                                      //       subcategories[index].subcategoryId,
-                                      //   categoryId: widget.categoryId,
-                                      // )
                               ));
                         },
                         child: SubcatCard(
